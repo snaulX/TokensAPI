@@ -1,0 +1,2 @@
+C:\Users\User\Desktop\snaulX\wolc\TokensAPI\src\jvmTest\kotlin\com\snaulX\TokensAPI\SampleTestsJVM.kt
+C:\Users\User\Desktop\snaulX\wolc\TokensAPI\src\commonTest\kotlin\com\snaulX\TokensAPI\SampleTests.kt
