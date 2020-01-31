@@ -45,3 +45,8 @@ kotlin {
         }
     }
 }
+
+/*dokka {
+    outputFormat = 'markdown'
+    outputDirectory = 'docs'
+}*/
