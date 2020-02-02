@@ -1,13 +1,15 @@
 package com.snaulX.TokensAPI
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import java.io.*
 
 actual class TokensCreator actual constructor() {
 
-    lateinit var output: File
+    lateinit var output: DataOutputStream
 
     actual fun setOutput(fileName: String) {
-        output = File(fileName)
+        output = DataOutputStream(FileOutputStream(fileName))
+        output.writeByte(header.value)
     }
 
     actual var line: Int = 0
@@ -19,6 +21,11 @@ actual class TokensCreator actual constructor() {
         classType: ClassType,
         data: Boolean
     ) {
+        output.writeByte(0)
+        output.writeUTF(name)
+        output.writeByte(security.value)
+        output.writeByte(classType.tokens_code)
+        output.writeBoolean(data)
     }
 
     actual fun createMethod(
@@ -27,32 +34,43 @@ actual class TokensCreator actual constructor() {
         security: SecurityDegree,
         abstract: Boolean
     ) {
+        output.writeByte(1)
+        output.writeUTF(name)
+        output.writeUTF(returnType)
+        output.writeByte(security.value)
+        output.writeBoolean(abstract)
     }
 
     actual fun createField(
         name: String,
         typeName: String,
-        defaultValue: Any?,
         security: SecurityDegree
     ) {
-    }
-
-    actual fun createNullableField(
-        name: String,
-        typeName: String,
-        defaultValue: Any,
-        security: SecurityDegree
-    ) {
+        output.writeByte(2)
+        output.writeUTF(name)
+        output.writeUTF(typeName)
+        output.writeByte(security.value)
     }
 
     actual fun createExtensionMethod(
         className: String,
         methodName: String,
+        returnType: String,
         security: SecurityDegree
     ) {
+        output.writeByte(3)
+        output.writeUTF(className)
+        output.writeUTF(methodName)
+        output.writeUTF(returnType)
+        output.writeByte(security.value)
     }
 
     actual fun markDirective(arguments: List<String>) {
+        output.writeByte(4)
+        output.writeInt(arguments.size)
+        for (arg: String in arguments) {
+            output.writeUTF(arg)
+        }
     }
 
     /**
@@ -60,6 +78,8 @@ actual class TokensCreator actual constructor() {
      * @param name Name of annotation
      */
     actual fun markAnnotation(name: String) {
+        output.writeByte(5)
+        output.writeUTF(name)
     }
 
     /**
@@ -68,6 +88,9 @@ actual class TokensCreator actual constructor() {
      * @param security Security access for this interface
      */
     actual fun createInterface(name: String, security: SecurityDegree) {
+        output.writeByte(6)
+        output.writeUTF(name)
+        output.writeByte(security.value)
     }
 
     /**
@@ -79,12 +102,14 @@ actual class TokensCreator actual constructor() {
      * And other more...
      */
     actual fun startBlock() {
+        output.writeByte(7)
     }
 
     /**
      * End block in context
      */
     actual fun endBlock() {
+        output.writeByte(8)
     }
 
     /**
@@ -92,6 +117,9 @@ actual class TokensCreator actual constructor() {
      * @param interfaces Names of interfaces which must be implement to class
      */
     actual fun implementClass(interfaces: List<String>) {
+        output.writeByte(9)
+        output.writeInt(interfaces.size)
+        for (iface: String in interfaces) output.writeUTF(iface)
     }
 
     /**
@@ -99,21 +127,29 @@ actual class TokensCreator actual constructor() {
      * @param baseClass Name of overriding class
      */
     actual fun overrideClass(baseClass: String) {
+        output.writeByte(10)
+        output.writeUTF(baseClass)
     }
 
     /**
      * Add assembly in .NET, Java Archive or Class File in JVM and static library in LLVM
      */
     actual fun include(libPath: String) {
+        output.writeByte(11)
+        output.writeUTF(libPath)
     }
 
     /**
      * Link tokens library to this file
      */
     actual fun linkLibrary(libraryPath: String) {
+        output.writeByte(12)
+        output.writeUTF(libraryPath)
     }
 
     actual fun markLabel(name: String) {
+        output.writeByte(13)
+        output.writeUTF(name)
     }
 
     /**
@@ -121,6 +157,8 @@ actual class TokensCreator actual constructor() {
      * @param name Name of importing package
      */
     actual fun importPackage(name: String) {
+        output.writeByte(14)
+        output.writeUTF(name)
     }
 
     /**
@@ -128,6 +166,8 @@ actual class TokensCreator actual constructor() {
      * @param name Name of creating package
      */
     actual fun markPackage(name: String) {
+        output.writeByte(15)
+        output.writeUTF(name)
     }
 
     /**
@@ -137,6 +177,10 @@ actual class TokensCreator actual constructor() {
      * @param isClass Checking: is it enum or enum class
      */
     actual fun createEnum(name: String, security: SecurityDegree, isClass: Boolean) {
+        output.writeByte(16)
+        output.writeUTF(name)
+        output.writeByte(security.value)
+        output.writeBoolean(isClass)
     }
 
     /**
@@ -145,6 +189,8 @@ actual class TokensCreator actual constructor() {
      * @param security Security access for this constructor
      */
     actual fun createConstructor(name: String, security: SecurityDegree) {
+        output.writeByte(17)
+        output.writeByte(security.value)
     }
 
     /**
@@ -153,14 +199,10 @@ actual class TokensCreator actual constructor() {
      * @param typeName Name of type of parameter
      * @param defaultValue Default value of parameter
      */
-    actual fun createParameter(name: String, typeName: String, defaultValue: Any?) {
-    }
-
-    /**
-     * Create parameter with nullable type
-     * (IT`S EXPERIMENTAL)
-     */
-    actual fun createNullableParameter(name: String, typeName: String, defaultValue: Any) {
+    actual fun createParameter(name: String, typeName: String) {
+        output.writeByte(18)
+        output.writeUTF(name)
+        output.writeUTF(typeName)
     }
 
     /**
@@ -169,18 +211,55 @@ actual class TokensCreator actual constructor() {
      * @param nameOfParameter Name of parameter for give. If this argument is empty - parameter for giving will be next in context
      */
     actual fun giveArgument(value: Any?, nameOfParameter: String) {
+        output.writeByte(19)
+        loadValue(value)
+        output.writeUTF(nameOfParameter)
+    }
+
+    fun loadValue(value: Any?) {
+        if (value == null) {
+            output.write(value)
+        }
+        else if (value is Char) {
+            output.writeChar(value.toInt())
+        }
+        else if (value is Boolean) {
+            output.writeBoolean(value)
+        }
+        else if (value is Byte) {
+            output.writeByte(value)
+        }
+        else if (value is Short) {
+            output.writeShort(value.toInt())
+        }
+        else if (value is Int) {
+            output.writeInt(value)
+        }
+        else if (value is Float) {
+            output.writeFloat(value)
+        }
+        else if (value is Long) {
+            output.writeLong(value)
+        }
+        else if (value is String) {
+            output.writeUTF(value)
+        }
     }
 
     /**
      * Call method with name. Master of method is last object in context
      */
     actual fun callMethod(name: String) {
+        output.writeByte(20)
+        output.writeUTF(name)
     }
 
     /**
      * Push variable with name or static class with name to context
      */
     actual fun callLiteral(name: String) {
+        output.writeByte(21)
+        output.writeUTF(name)
     }
 
     /**
@@ -189,6 +268,9 @@ actual class TokensCreator actual constructor() {
      * @param oldTypeName Name of alias type
      */
     actual fun createTypeAlias(name: String, oldTypeName: String) {
+        output.writeByte(22)
+        output.writeUTF(name)
+        output.writeUTF(oldTypeName)
     }
 
     /**
@@ -197,12 +279,16 @@ actual class TokensCreator actual constructor() {
      * @param oldFuncName Name of alias function
      */
     actual fun createFuncAlias(name: String, oldFuncName: String) {
+        output.writeByte(23)
+        output.writeUTF(name)
+        output.writeUTF(oldFuncName)
     }
 
     /**
      * Mark break operator in this position
      */
     actual fun markBreak() {
+        output.writeByte(24)
     }
 
     /**
@@ -210,84 +296,99 @@ actual class TokensCreator actual constructor() {
      * @param name Name of label which going to
      */
     actual fun goto(name: String) {
+        output.writeByte(26)
+        output.writeUTF(name)
     }
 
     /**
      * Mark continue operator in this position
      */
     actual fun markContinue() {
+        output.writeByte(25)
     }
 
     /**
      * Mark breakpoint
      */
     actual fun markBreakpoint() {
+        output.writeByte(27)
     }
 
     /**
      * Open new statement in context and add to this while statement will not close
      */
     actual fun openStatement() {
+        output.writeByte(28)
     }
 
     /**
      * Close current statement in context
      */
     actual fun closeStatement() {
+        output.writeByte(29)
     }
 
     /**
      * Add previous value from context and next
      */
     actual fun add() {
+        output.writeByte(30)
     }
 
     /**
      * Subtract previous value from context and next
      */
     actual fun subtract() {
+        output.writeByte(31)
     }
 
     /**
      * Divide previous value from context and next
      */
     actual fun divide() {
+        output.writeByte(32)
     }
 
     /**
      * Multiply previous value from context and next
      */
     actual fun multiply() {
+        output.writeByte(33)
     }
 
     /**
      * Compares for equality previous value from context and next
      */
     actual fun equals() {
+        output.writeByte(34)
     }
 
     /**
      * Compares for not equality previous value from context and next
      */
     actual fun notEquals() {
+        output.writeByte(35)
     }
 
     /**
      * Create if operator and make new if construction. Next statement will push into this if
      */
     actual fun createIf() {
+        output.writeByte(40)
     }
 
     /**
      * Create else if operator and continue current if construction. Next statement will push into this if
      */
     actual fun createElseIf() {
+        output.writeByte(41)
     }
 
     /**
      * Create else operator and close current if construction
      */
     actual fun createElse() {
+        output.writeByte(42)
     }
 
     /**
@@ -295,6 +396,8 @@ actual class TokensCreator actual constructor() {
      * @param name Name of switching variable
      */
     actual fun createSwitch(name: String) {
+        output.writeByte(43)
+        output.writeUTF(name)
     }
 
     /**
@@ -302,12 +405,15 @@ actual class TokensCreator actual constructor() {
      * @param value Checking value
      */
     actual fun createCase(value: Any?) {
+        output.writeByte(44)
+        loadValue(value)
     }
 
     /**
      * Create default block in current switch operator
      */
     actual fun createDefault() {
+        output.writeByte(45)
     }
 
     /**
@@ -315,36 +421,43 @@ actual class TokensCreator actual constructor() {
      * @param name Name of variable for use in with operator
      */
     actual fun createWith(name: String) {
+        output.writeByte(46)
+        output.writeUTF(name)
     }
 
     /**
      * Create while loop or add statement if it is do-while loop
      */
     actual fun createWhile() {
+        output.writeByte(47)
     }
 
     /**
      * Create do-while loop and do block
      */
     actual fun createDo() {
+        output.writeByte(48)
     }
 
     /**
      * Create for loop with three parameters (parameters writing using statements)
      */
     actual fun createFor() {
+        output.writeByte(49)
     }
 
     /**
      * Create foreach loop
      */
     actual fun createForeach() {
+        output.writeByte(50)
     }
 
     /**
      * Add in operator
      */
     actual fun addIn() {
+        output.writeByte(51)
     }
 
     /**
@@ -352,30 +465,36 @@ actual class TokensCreator actual constructor() {
      * In a lot of languages it is operator \[index\]
      */
     actual fun getByIndex(index: Int) {
+        output.writeByte(52)
+        output.writeInt(index)
     }
 
     /**
      * Compares for greater previous value from context then next
      */
     actual fun greaterThen() {
+        output.writeByte(36)
     }
 
     /**
      * Compares for less previous value from context then next
      */
     actual fun lessThen() {
+        output.writeByte(37)
     }
 
     /**
      * Compares for greater or equals previous value from context then next
      */
     actual fun greaterOrEqualsThen() {
+        output.writeByte(38)
     }
 
     /**
      * Compares for less or equals previous value from context then next
      */
     actual fun lessOrEqualsThen() {
+        output.writeByte(39)
     }
 
     /**
@@ -383,6 +502,8 @@ actual class TokensCreator actual constructor() {
      * @param value Returning value
      */
     actual fun addReturn(value: Any?) {
+        output.writeByte(53)
+        loadValue(value)
     }
 
     /**
@@ -392,6 +513,9 @@ actual class TokensCreator actual constructor() {
      * @param typeName Name of type with this constructor. If we don`t know type - write empty string
      */
     actual fun createNew(name: String, typeName: String) {
+        output.writeByte(54)
+        output.writeUTF(name)
+        output.writeUTF(typeName)
     }
 
     /**
@@ -400,6 +524,9 @@ actual class TokensCreator actual constructor() {
      * @param returnType Type of returning value
      */
     actual fun createOperator(type: OperatorType, returnType: String) {
+        output.writeByte(55)
+        output.writeByte(type.value)
+        output.writeUTF(returnType)
     }
 
     /**
@@ -407,6 +534,8 @@ actual class TokensCreator actual constructor() {
      * @param typeName Name of type for convert to
      */
     actual fun convertTo(typeName: String) {
+        output.writeByte(56)
+        output.writeUTF(typeName)
     }
 
     /**
@@ -414,6 +543,13 @@ actual class TokensCreator actual constructor() {
      * @param typeName Name of compareble type
      */
     actual fun addIs(typeName: String) {
+        output.writeByte(57)
+        output.writeUTF(typeName)
     }
 
+    actual var header: HeaderType = HeaderType.Script
+}
+
+fun DataOutputStream.writeByte(value: Byte) {
+    writeByte(value.toInt())
 }

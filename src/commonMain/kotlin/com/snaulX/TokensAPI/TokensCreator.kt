@@ -3,11 +3,11 @@ package com.snaulX.TokensAPI
 expect class TokensCreator() {
     var line: Int
     var position: Int
+    var header: HeaderType
     fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT, data: Boolean = false)
     fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, abstract: Boolean = false)
-    fun createField(name: String, typeName: String, defaultValue: Any? = null, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun createNullableField(name: String, typeName: String, defaultValue: Any, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun createExtensionMethod(className: String, methodName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createExtensionMethod(className: String, methodName: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC)
     fun markDirective(arguments: List<String>)
     /**
      * Mark annotation with [name]. Arguments of annotation must be defined in [giveArgument]
@@ -87,14 +87,8 @@ expect class TokensCreator() {
      * Create parameter with name, type and default value
      * @param name Name of creating parameter
      * @param typeName Name of type of parameter
-     * @param defaultValue Default value of parameter
      */
-    fun createParameter(name: String, typeName: String, defaultValue: Any? = null)
-    /**
-     * Create parameter with nullable type
-     * (IT`S EXPERIMENTAL)
-     */
-    fun createNullableParameter(name: String, typeName: String, defaultValue: Any)
+    fun createParameter(name: String, typeName: String)
     /**
      * Give argument to calling function or annotation
      * @param value Value for give to parameter
@@ -111,7 +105,7 @@ expect class TokensCreator() {
     fun callLiteral(name: String)
 
     /**
-     * Set output file for writing tokens to this file
+     * Set output file for writing tokens to this file and write to this file [header]
      * @param fileName Name of file which be output
      */
     fun setOutput(fileName: String)

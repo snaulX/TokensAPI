@@ -29,15 +29,6 @@ actual class TokensCreator actual constructor() {
     actual fun createField(
         name: String,
         typeName: String,
-        defaultValue: Any?,
-        security: SecurityDegree
-    ) {
-    }
-
-    actual fun createNullableField(
-        name: String,
-        typeName: String,
-        defaultValue: Any,
         security: SecurityDegree
     ) {
     }
@@ -45,6 +36,7 @@ actual class TokensCreator actual constructor() {
     actual fun createExtensionMethod(
         className: String,
         methodName: String,
+        returnType: String,
         security: SecurityDegree
     ) {
     }
@@ -150,14 +142,7 @@ actual class TokensCreator actual constructor() {
      * @param typeName Name of type of parameter
      * @param defaultValue Default value of parameter
      */
-    actual fun createParameter(name: String, typeName: String, defaultValue: Any?) {
-    }
-
-    /**
-     * Create parameter with nullable type
-     * (IT`S EXPERIMENTAL)
-     */
-    actual fun createNullableParameter(name: String, typeName: String, defaultValue: Any) {
+    actual fun createParameter(name: String, typeName: String) {
     }
 
     /**
@@ -420,4 +405,6 @@ actual class TokensCreator actual constructor() {
      */
     actual fun addIs(typeName: String) {
     }
+
+    actual var header: HeaderType = HeaderType.Script
 }
