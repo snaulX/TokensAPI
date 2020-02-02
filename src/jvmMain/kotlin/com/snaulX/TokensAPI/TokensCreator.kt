@@ -71,18 +71,6 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Remove class from context and end it
-     */
-    actual fun endClass() {
-    }
-
-    /**
-     * Remove method from context and end it
-     */
-    actual fun endMethod() {
-    }
-
-    /**
      * Start default block
      * If in context save class - this function create body of this class
      * If in context save enum - body of enum
@@ -193,6 +181,239 @@ actual class TokensCreator actual constructor() {
      * Push variable with name or static class with name to context
      */
     actual fun callLiteral(name: String) {
+    }
+
+    /**
+     * Create typealias with name of type by oldTypeName
+     * @param name New type name
+     * @param oldTypeName Name of alias type
+     */
+    actual fun createTypeAlias(name: String, oldTypeName: String) {
+    }
+
+    /**
+     * Create funcalias with name of function with oldFuncName
+     * @param name Name of new function
+     * @param oldFuncName Name of alias function
+     */
+    actual fun createFuncAlias(name: String, oldFuncName: String) {
+    }
+
+    /**
+     * Mark break operator in this position
+     */
+    actual fun markBreak() {
+    }
+
+    /**
+     * Mark goto operator in this position for [name] label
+     * @param name Name of label which going to
+     */
+    actual fun goto(name: String) {
+    }
+
+    /**
+     * Mark continue operator in this position
+     */
+    actual fun markContinue() {
+    }
+
+    /**
+     * Mark breakpoint
+     */
+    actual fun markBreakpoint() {
+    }
+
+    /**
+     * Open new statement in context and add to this while statement will not close
+     */
+    actual fun openStatement() {
+    }
+
+    /**
+     * Close current statement in context
+     */
+    actual fun closeStatement() {
+    }
+
+    /**
+     * Add previous value from context and next
+     */
+    actual fun add() {
+    }
+
+    /**
+     * Subtract previous value from context and next
+     */
+    actual fun subtract() {
+    }
+
+    /**
+     * Divide previous value from context and next
+     */
+    actual fun divide() {
+    }
+
+    /**
+     * Multiply previous value from context and next
+     */
+    actual fun multiply() {
+    }
+
+    /**
+     * Compares for equality previous value from context and next
+     */
+    actual fun equals() {
+    }
+
+    /**
+     * Compares for not equality previous value from context and next
+     */
+    actual fun notEquals() {
+    }
+
+    /**
+     * Create if operator and make new if construction. Next statement will push into this if
+     */
+    actual fun createIf() {
+    }
+
+    /**
+     * Create else if operator and continue current if construction. Next statement will push into this if
+     */
+    actual fun createElseIf() {
+    }
+
+    /**
+     * Create else operator and close current if construction
+     */
+    actual fun createElse() {
+    }
+
+    /**
+     * Create switch operator and push to this variable with [name]
+     * @param name Name of switching variable
+     */
+    actual fun createSwitch(name: String) {
+    }
+
+    /**
+     * Create case block in current switch operator for checking on [value]
+     * @param value Checking value
+     */
+    actual fun createCase(value: Any?) {
+    }
+
+    /**
+     * Create default block in current switch operator
+     */
+    actual fun createDefault() {
+    }
+
+    /**
+     * Create with operator for variable with [name]
+     * @param name Name of variable for use in with operator
+     */
+    actual fun createWith(name: String) {
+    }
+
+    /**
+     * Create while loop or add statement if it is do-while loop
+     */
+    actual fun createWhile() {
+    }
+
+    /**
+     * Create do-while loop and do block
+     */
+    actual fun createDo() {
+    }
+
+    /**
+     * Create for loop with three parameters (parameters writing using statements)
+     */
+    actual fun createFor() {
+    }
+
+    /**
+     * Create foreach loop
+     */
+    actual fun createForeach() {
+    }
+
+    /**
+     * Add in operator
+     */
+    actual fun addIn() {
+    }
+
+    /**
+     * Get element in collection by index.
+     * In a lot of languages it is operator \[index\]
+     */
+    actual fun getByIndex(index: Int) {
+    }
+
+    /**
+     * Compares for greater previous value from context then next
+     */
+    actual fun greaterThen() {
+    }
+
+    /**
+     * Compares for less previous value from context then next
+     */
+    actual fun lessThen() {
+    }
+
+    /**
+     * Compares for greater or equals previous value from context then next
+     */
+    actual fun greaterOrEqualsThen() {
+    }
+
+    /**
+     * Compares for less or equals previous value from context then next
+     */
+    actual fun lessOrEqualsThen() {
+    }
+
+    /**
+     * Add operator return and return [value]
+     * @param value Returning value
+     */
+    actual fun addReturn(value: Any?) {
+    }
+
+    /**
+     * Create new object using operator new and constructor [name].
+     * If we now type of this constructor - write name of this type in the [typeName]
+     * @param name Name of using constructor
+     * @param typeName Name of type with this constructor. If we don`t know type - write empty string
+     */
+    actual fun createNew(name: String, typeName: String) {
+    }
+
+    /**
+     * Create operator of [type] with [returnType]
+     * @param type Type of operator
+     * @param returnType Type of returning value
+     */
+    actual fun createOperator(type: OperatorType, returnType: String) {
+    }
+
+    /**
+     * Convert next statement to [typeName]
+     * @param typeName Name of type for convert to
+     */
+    actual fun convertTo(typeName: String) {
+    }
+
+    /**
+     * Add operator is (compare type of last object from context with type by [typeName])
+     * @param typeName Name of compareble type
+     */
+    actual fun addIs(typeName: String) {
     }
 
 }
