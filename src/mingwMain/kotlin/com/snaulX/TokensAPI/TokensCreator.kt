@@ -13,8 +13,7 @@ actual class TokensCreator actual constructor() {
     actual fun createClass(
         name: String,
         security: SecurityDegree,
-        classType: ClassType,
-        data: Boolean
+        classType: ClassType
     ) {
     }
 
@@ -22,14 +21,15 @@ actual class TokensCreator actual constructor() {
         name: String,
         returnType: String,
         security: SecurityDegree,
-        abstract: Boolean
+        funcType: FuncType
     ) {
     }
 
     actual fun createField(
         name: String,
         typeName: String,
-        security: SecurityDegree
+        security: SecurityDegree,
+        static: Boolean
     ) {
     }
 

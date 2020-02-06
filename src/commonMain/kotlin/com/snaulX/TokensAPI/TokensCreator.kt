@@ -9,9 +9,9 @@ expect class TokensCreator() {
      * @param platform Target platform
      */
     fun markPlatform(platform: PlatformType)
-    fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT, data: Boolean = false)
-    fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, abstract: Boolean = false)
-    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT)
+    fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, funcType: FuncType = FuncType.DEFAULT)
+    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC, static: Boolean = false)
     fun createExtensionMethod(className: String, methodName: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC)
     fun markDirective(arguments: List<String>)
     /**

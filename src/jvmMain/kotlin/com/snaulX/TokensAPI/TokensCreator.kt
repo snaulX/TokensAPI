@@ -21,38 +21,38 @@ actual class TokensCreator actual constructor() {
     actual fun createClass(
         name: String,
         security: SecurityDegree,
-        classType: ClassType,
-        data: Boolean
+        classType: ClassType
     ) {
         output.writeByte(0)
         output.writeUTF(name)
         output.writeByte(security.value)
         output.writeByte(classType.tokens_code)
-        output.writeBoolean(data)
     }
 
     actual fun createMethod(
         name: String,
         returnType: String,
         security: SecurityDegree,
-        abstract: Boolean
+        funcType: FuncType
     ) {
         output.writeByte(1)
         output.writeUTF(name)
         output.writeUTF(returnType)
         output.writeByte(security.value)
-        output.writeBoolean(abstract)
+        output.writeByte(funcType.value)
     }
 
     actual fun createField(
         name: String,
         typeName: String,
-        security: SecurityDegree
+        security: SecurityDegree,
+        static: Boolean
     ) {
         output.writeByte(2)
         output.writeUTF(name)
         output.writeUTF(typeName)
         output.writeByte(security.value)
+        output.writeBoolean(static)
     }
 
     actual fun createExtensionMethod(
