@@ -1,9 +1,12 @@
 package com.snaulX.TokensAPI
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import java.io.*
 
 actual class TokensCreator actual constructor() {
+
+    fun DataOutputStream.writeByte(value: Byte) {
+        writeByte(value.toInt())
+    }
 
     lateinit var output: DataOutputStream
 
@@ -548,8 +551,20 @@ actual class TokensCreator actual constructor() {
     }
 
     actual var header: HeaderType = HeaderType.Script
-}
+    /**
+     * Add operator typeof (get type by [typeName])
+     * @param typeName Name of getting type
+     */
+    actual fun checkTypeof(typeName: String) {
+        output.writeByte(58)
+        output.writeUTF(typeName)
+    }
 
-fun DataOutputStream.writeByte(value: Byte) {
-    writeByte(value.toInt())
+    /**
+     * Mark target platform of the file
+     * @param platform Target platform
+     */
+    actual fun markPlatform(platform: PlatformType) {
+        output.writeByte(platform.value)
+    }
 }

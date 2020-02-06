@@ -407,4 +407,17 @@ actual class TokensCreator actual constructor() {
     }
 
     actual var header: HeaderType = HeaderType.Script
+    /**
+     * Add operator typeof (get type by [typeName])
+     * @param typeName Name of getting type
+     */
+    actual fun checkTypeof(typeName: String) {
+    }
+
+    /**
+     * Mark target platform of the file
+     * @param platform Target platform
+     */
+    actual fun markPlatform(platform: PlatformType) {
+    }
 }

@@ -4,6 +4,11 @@ expect class TokensCreator() {
     var line: Int
     var position: Int
     var header: HeaderType
+    /**
+     * Mark target platform of the file
+     * @param platform Target platform
+     */
+    fun markPlatform(platform: PlatformType)
     fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT, data: Boolean = false)
     fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, abstract: Boolean = false)
     fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
@@ -304,4 +309,10 @@ expect class TokensCreator() {
      * @param typeName Name of compareble type
      */
     fun addIs(typeName: String)
+
+    /**
+     * Add operator typeof (get type by [typeName])
+     * @param typeName Name of getting type
+     */
+    fun checkTypeof(typeName: String)
 }
