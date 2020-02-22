@@ -5,5 +5,6 @@ enum class ClassType(val tokens_code: Byte) {
     SEALED(1),
     ABSTRACT(2),
     STATIC(3),
-    DATA(4)
+    DATA(4),
+    ENUM(5)
 }

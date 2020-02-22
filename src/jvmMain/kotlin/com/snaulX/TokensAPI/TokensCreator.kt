@@ -45,14 +45,13 @@ actual class TokensCreator actual constructor() {
     actual fun createField(
         name: String,
         typeName: String,
-        security: SecurityDegree,
-        static: Boolean
+        security: SecurityDegree
     ) {
         output.writeByte(2)
         output.writeUTF(name)
         output.writeUTF(typeName)
         output.writeByte(security.value)
-        output.writeBoolean(static)
+        output.writeByte(0) //field is default type
     }
 
     actual fun createExtensionMethod(
@@ -177,13 +176,11 @@ actual class TokensCreator actual constructor() {
      * Create enum or enum class in context with name, security
      * @param name Name of creating enum
      * @param security Security access for this enum
-     * @param isClass Checking: is it enum or enum class
      */
-    actual fun createEnum(name: String, security: SecurityDegree, isClass: Boolean) {
+    actual fun createEnum(name: String, security: SecurityDegree) {
         output.writeByte(16)
         output.writeUTF(name)
         output.writeByte(security.value)
-        output.writeBoolean(isClass)
     }
 
     /**
@@ -566,5 +563,21 @@ actual class TokensCreator actual constructor() {
      */
     actual fun markPlatform(platform: PlatformType) {
         output.writeByte(platform.value)
+    }
+
+    actual fun createStaticField(name: String, typeName: String, security: SecurityDegree) {
+        output.writeByte(2)
+        output.writeUTF(name)
+        output.writeUTF(typeName)
+        output.writeByte(security.value)
+        output.writeByte(1) //field is static type
+    }
+
+    actual fun createFinalField(name: String, typeName: String, security: SecurityDegree) {
+        output.writeByte(2)
+        output.writeUTF(name)
+        output.writeUTF(typeName)
+        output.writeByte(security.value)
+        output.writeByte(2) //field is final type
     }
 }

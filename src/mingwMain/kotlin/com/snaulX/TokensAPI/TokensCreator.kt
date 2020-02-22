@@ -28,8 +28,7 @@ actual class TokensCreator actual constructor() {
     actual fun createField(
         name: String,
         typeName: String,
-        security: SecurityDegree,
-        static: Boolean
+        security: SecurityDegree
     ) {
     }
 
@@ -123,9 +122,8 @@ actual class TokensCreator actual constructor() {
      * Create enum or enum class in context with name, security
      * @param name Name of creating enum
      * @param security Security access for this enum
-     * @param isClass Checking: is it enum or enum class
      */
-    actual fun createEnum(name: String, security: SecurityDegree, isClass: Boolean) {
+    actual fun createEnum(name: String, security: SecurityDegree) {
     }
 
     /**
@@ -419,5 +417,11 @@ actual class TokensCreator actual constructor() {
      * @param platform Target platform
      */
     actual fun markPlatform(platform: PlatformType) {
+    }
+
+    actual fun createStaticField(name: String, typeName: String, security: SecurityDegree) {
+    }
+
+    actual fun createFinalField(name: String, typeName: String, security: SecurityDegree) {
     }
 }

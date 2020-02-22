@@ -11,7 +11,9 @@ expect class TokensCreator() {
     fun markPlatform(platform: PlatformType)
     fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT)
     fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, funcType: FuncType = FuncType.DEFAULT)
-    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC, static: Boolean = false)
+    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createStaticField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createFinalField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
     fun createExtensionMethod(className: String, methodName: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC)
     fun markDirective(arguments: List<String>)
     /**
@@ -79,9 +81,8 @@ expect class TokensCreator() {
      * Create enum or enum class in context with name, security
      * @param name Name of creating enum
      * @param security Security access for this enum
-     * @param isClass Checking: is it enum or enum class
      */
-    fun createEnum(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, isClass: Boolean = false)
+    fun createEnum(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
     /**
      * Create constructor in class of context
      * @param name Name of creating constructor
