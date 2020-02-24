@@ -409,13 +409,6 @@ actual class TokensCreator actual constructor() {
     actual fun checkTypeof(typeName: String) {
     }
 
-    /**
-     * Mark target platform of the file
-     * @param platform Target platform
-     */
-    actual fun markPlatform(platform: PlatformType) {
-    }
-
     actual fun createStaticField(name: String, typeName: String, security: SecurityDegree) {
     }
 
@@ -427,4 +420,6 @@ actual class TokensCreator actual constructor() {
      */
     actual fun incLine() {
     }
+
+    actual var platform: PlatformType = PlatformType.Common
 }

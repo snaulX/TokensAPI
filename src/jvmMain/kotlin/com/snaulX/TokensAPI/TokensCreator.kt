@@ -13,6 +13,7 @@ actual class TokensCreator actual constructor() {
     actual fun setOutput(fileName: String) {
         output = DataOutputStream(FileOutputStream(fileName))
         output.writeByte(header.value)
+        output.writeByte(platform.value)
     }
 
     actual fun createClass(
@@ -554,14 +555,6 @@ actual class TokensCreator actual constructor() {
         output.writeUTF(typeName)
     }
 
-    /**
-     * Mark target platform of the file
-     * @param platform Target platform
-     */
-    actual fun markPlatform(platform: PlatformType) {
-        output.writeByte(platform.value)
-    }
-
     actual fun createStaticField(name: String, typeName: String, security: SecurityDegree) {
         output.writeByte(2)
         output.writeUTF(name)
@@ -584,4 +577,6 @@ actual class TokensCreator actual constructor() {
     actual fun incLine() {
         output.writeByte(59)
     }
+
+    actual var platform: PlatformType = PlatformType.Common
 }

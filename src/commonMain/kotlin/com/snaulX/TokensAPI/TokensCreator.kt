@@ -2,15 +2,11 @@ package com.snaulX.TokensAPI
 
 expect class TokensCreator() {
     var header: HeaderType
+    var platform: PlatformType
     /**
      * Set incrementing line to Tokens code for right printing of errors
      */
     fun incLine()
-    /**
-     * Mark target platform of the file
-     * @param platform Target platform
-     */
-    fun markPlatform(platform: PlatformType)
     fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT)
     fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, funcType: FuncType = FuncType.DEFAULT)
     fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
