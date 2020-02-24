@@ -1,9 +1,11 @@
 package com.snaulX.TokensAPI
 
 expect class TokensCreator() {
-    var line: Int
-    var position: Int
     var header: HeaderType
+    /**
+     * Set incrementing line to Tokens code for right printing of errors
+     */
+    fun incLine()
     /**
      * Mark target platform of the file
      * @param platform Target platform

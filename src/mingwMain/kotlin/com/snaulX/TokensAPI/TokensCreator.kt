@@ -7,9 +7,6 @@ actual class TokensCreator actual constructor() {
 
     lateinit var file: CPointer<FILE>
 
-    actual var line: Int = 0
-    actual var position: Int = 0
-
     actual fun createClass(
         name: String,
         security: SecurityDegree,
@@ -423,5 +420,11 @@ actual class TokensCreator actual constructor() {
     }
 
     actual fun createFinalField(name: String, typeName: String, security: SecurityDegree) {
+    }
+
+    /**
+     * Set incrementing line to Tokens code for right printing of errors
+     */
+    actual fun incLine() {
     }
 }

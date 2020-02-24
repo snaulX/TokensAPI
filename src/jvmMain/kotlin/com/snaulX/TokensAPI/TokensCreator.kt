@@ -15,9 +15,6 @@ actual class TokensCreator actual constructor() {
         output.writeByte(header.value)
     }
 
-    actual var line: Int = 0
-    actual var position: Int = 0
-
     actual fun createClass(
         name: String,
         security: SecurityDegree,
@@ -579,5 +576,12 @@ actual class TokensCreator actual constructor() {
         output.writeUTF(typeName)
         output.writeByte(security.value)
         output.writeByte(2) //field is final type
+    }
+
+    /**
+     * Set incrementing line to Tokens code for right printing of errors
+     */
+    actual fun incLine() {
+        output.writeByte(59)
     }
 }
