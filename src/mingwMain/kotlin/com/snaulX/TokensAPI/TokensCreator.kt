@@ -141,14 +141,6 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Give argument to calling function or annotation
-     * @param value Value for give to parameter
-     * @param nameOfParameter Name of parameter for give. If this argument is empty - parameter for giving will be next in context
-     */
-    actual fun giveArgument(value: Any?, nameOfParameter: String) {
-    }
-
-    /**
      * Call method with name. Master of method is last object in context
      */
     actual fun callMethod(name: String) {
@@ -422,4 +414,9 @@ actual class TokensCreator actual constructor() {
     }
 
     actual var platform: PlatformType = PlatformType.Common
+    /**
+     * Add operator of assign
+     */
+    actual fun assignValue() {
+    }
 }

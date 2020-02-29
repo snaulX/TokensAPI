@@ -203,17 +203,6 @@ actual class TokensCreator actual constructor() {
         output.writeUTF(typeName)
     }
 
-    /**
-     * Give argument to calling function or annotation
-     * @param value Value for give to parameter
-     * @param nameOfParameter Name of parameter for give. If this argument is empty - parameter for giving will be next in context
-     */
-    actual fun giveArgument(value: Any?, nameOfParameter: String) {
-        output.writeByte(19)
-        loadValue(value)
-        output.writeUTF(nameOfParameter)
-    }
-
     fun loadValue(value: Any?) {
         if (value == null) {
             output.write(value)
@@ -579,4 +568,11 @@ actual class TokensCreator actual constructor() {
     }
 
     actual var platform: PlatformType = PlatformType.Common
+
+    /**
+     * Add operator of assign
+     */
+    actual fun assignValue() {
+        output.writeByte(19)
+    }
 }

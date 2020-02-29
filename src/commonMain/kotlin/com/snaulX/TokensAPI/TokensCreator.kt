@@ -94,12 +94,6 @@ expect class TokensCreator() {
      */
     fun createParameter(name: String, typeName: String)
     /**
-     * Give argument to calling function or annotation
-     * @param value Value for give to parameter
-     * @param nameOfParameter Name of parameter for give. If this argument is empty - parameter for giving will be next in context
-     */
-    fun giveArgument(value: Any?, nameOfParameter: String = "")
-    /**
      * Call method with [name]. Master of method is last object in context
      */
     fun callMethod(name: String)
@@ -314,4 +308,9 @@ expect class TokensCreator() {
      * @param typeName Name of getting type
      */
     fun checkTypeof(typeName: String)
+
+    /**
+     * Add operator of assign
+     */
+    fun assignValue()
 }
