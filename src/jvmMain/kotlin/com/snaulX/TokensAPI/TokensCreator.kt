@@ -388,12 +388,10 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create case block in current switch operator for checking on [value]
-     * @param value Checking value
+     * Create case block in current switch operator for checking on next value in context
      */
-    actual fun createCase(value: Any?) {
+    actual fun createCase() {
         output.writeByte(44)
-        loadValue(value)
     }
 
     /**
@@ -495,14 +493,11 @@ actual class TokensCreator actual constructor() {
 
     /**
      * Create new object using operator new and constructor [name].
-     * If we now type of this constructor - write name of this type in the [typeName]
      * @param name Name of using constructor
-     * @param typeName Name of type with this constructor. If we don`t know type - write empty string
      */
-    actual fun createNew(name: String, typeName: String) {
+    actual fun createNew(name: String) {
         output.writeByte(54)
         output.writeUTF(name)
-        output.writeUTF(typeName)
     }
 
     /**
@@ -574,5 +569,68 @@ actual class TokensCreator actual constructor() {
      */
     actual fun assignValue() {
         output.writeByte(19)
+    }
+
+    /**
+     * Return inversion value or just operator not
+     */
+    actual fun inversion() {
+        output.writeByte(60)
+    }
+
+    /**
+     * Operator and
+     */
+    actual fun and() {
+        output.writeByte(61)
+    }
+
+    /**
+     * Operator or
+     */
+    actual fun or() {
+        output.writeByte(62)
+    }
+
+    /**
+     * Operator xor
+     */
+    actual fun xor() {
+        output.writeByte(63)
+    }
+
+    /**
+     * Operator of increment
+     */
+    actual fun increment() {
+        output.writeByte(64)
+    }
+
+    /**
+     * Operator of decrement
+     */
+    actual fun decrement() {
+        output.writeByte(65)
+    }
+
+    /**
+     * Throw exception with next object in context
+     */
+    actual fun throwException() {
+        output.writeByte(66)
+    }
+
+    /**
+     * Operator modulo '%'
+     */
+    actual fun modulo() {
+        output.writeByte(67)
+    }
+
+    /**
+     * Raises the previous number to the power which expresses the following
+     */
+    actual fun power() {
+        output.writeByte(68)
     }
 }

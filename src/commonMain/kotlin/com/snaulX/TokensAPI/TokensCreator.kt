@@ -172,6 +172,46 @@ expect class TokensCreator() {
     fun multiply()
 
     /**
+     * Operator modulo '%'
+     */
+    fun modulo()
+
+    /**
+     * Raises the previous number to the power which expresses the following
+     */
+    fun power()
+
+    /**
+     * Operator of increment
+     */
+    fun increment()
+
+    /**
+     * Operator of decrement
+     */
+    fun decrement()
+
+    /**
+     * Return inversion value or just operator not
+     */
+    fun inversion()
+
+    /**
+     * Operator and
+     */
+    fun and()
+
+    /**
+     * Operator or
+     */
+    fun or()
+
+    /**
+     * Operator xor
+     */
+    fun xor()
+
+    /**
      * Compares for equality previous value from context and next
      */
     fun equals()
@@ -223,10 +263,9 @@ expect class TokensCreator() {
     fun createSwitch(name: String)
 
     /**
-     * Create case block in current switch operator for checking on [value]
-     * @param value Checking value
+     * Create case block in current switch operator for checking on next value in context
      */
-    fun createCase(value: Any?)
+    fun createCase()
 
     /**
      * Create default block in current switch operator
@@ -278,11 +317,9 @@ expect class TokensCreator() {
 
     /**
      * Create new object using operator new and constructor [name].
-     * If we now type of this constructor - write name of this type in the [typeName]
      * @param name Name of using constructor
-     * @param typeName Name of type with this constructor. If we don`t know type - write empty string
      */
-    fun createNew(name: String, typeName: String = "")
+    fun createNew(name: String)
 
     /**
      * Create operator of [type] with [returnType]
@@ -313,4 +350,9 @@ expect class TokensCreator() {
      * Add operator of assign
      */
     fun assignValue()
+
+    /**
+     * Throw exception with next object in context
+     */
+    fun throwException()
 }

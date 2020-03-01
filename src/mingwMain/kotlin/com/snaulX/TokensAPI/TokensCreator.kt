@@ -275,10 +275,9 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create case block in current switch operator for checking on [value]
-     * @param value Checking value
+     * Create case block in current switch operator for checking on next value in context
      */
-    actual fun createCase(value: Any?) {
+    actual fun createCase() {
     }
 
     /**
@@ -364,11 +363,9 @@ actual class TokensCreator actual constructor() {
 
     /**
      * Create new object using operator new and constructor [name].
-     * If we now type of this constructor - write name of this type in the [typeName]
      * @param name Name of using constructor
-     * @param typeName Name of type with this constructor. If we don`t know type - write empty string
      */
-    actual fun createNew(name: String, typeName: String) {
+    actual fun createNew(name: String) {
     }
 
     /**
@@ -418,5 +415,59 @@ actual class TokensCreator actual constructor() {
      * Add operator of assign
      */
     actual fun assignValue() {
+    }
+
+    /**
+     * Return inversion value or just operator not
+     */
+    actual fun inversion() {
+    }
+
+    /**
+     * Operator and
+     */
+    actual fun and() {
+    }
+
+    /**
+     * Operator or
+     */
+    actual fun or() {
+    }
+
+    /**
+     * Operator xor
+     */
+    actual fun xor() {
+    }
+
+    /**
+     * Operator of increment
+     */
+    actual fun increment() {
+    }
+
+    /**
+     * Operator of decrement
+     */
+    actual fun decrement() {
+    }
+
+    /**
+     * Throw exception with next object in context
+     */
+    actual fun throwException() {
+    }
+
+    /**
+     * Operator modulo '%'
+     */
+    actual fun modulo() {
+    }
+
+    /**
+     * Raises the previous number to the power which expresses the following
+     */
+    actual fun power() {
     }
 }
