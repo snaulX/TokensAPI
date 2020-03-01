@@ -109,18 +109,16 @@ expect class TokensCreator() {
     fun setOutput(fileName: String)
 
     /**
-     * Create typealias with [name] of type by [oldTypeName]
+     * Create typealias with [name] of type
      * @param name New type name
-     * @param oldTypeName Name of alias type
      */
-    fun createTypeAlias(name: String, oldTypeName: String)
+    fun createTypeAlias(name: String)
 
     /**
-     * Create funcalias with [name] of function with [oldFuncName]
+     * Create funcalias with [name]
      * @param name Name of new function
-     * @param oldFuncName Name of alias function
      */
-    fun createFuncAlias(name: String, oldFuncName: String)
+    fun createFuncAlias(name: String)
     /**
      * Mark break operator in this position
      */
@@ -310,10 +308,9 @@ expect class TokensCreator() {
     fun getByIndex(index: Int)
 
     /**
-     * Add operator return and return [value]
-     * @param value Returning value
+     * Add operator return and return next value in context
      */
-    fun addReturn(value: Any?)
+    fun addReturn()
 
     /**
      * Create new object using operator new and constructor [name].

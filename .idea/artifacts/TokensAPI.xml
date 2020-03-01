@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TokensAPI">
+    <output-path>$PROJECT_DIR$/../../Tangara/TokenJVM/lib</output-path>
+    <root id="archive" name="TokensAPI.jar" />
+  </artifact>
+</component>

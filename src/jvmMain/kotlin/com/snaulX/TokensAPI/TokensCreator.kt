@@ -250,25 +250,21 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create typealias with name of type by oldTypeName
+     * Create typealias with name of type
      * @param name New type name
-     * @param oldTypeName Name of alias type
      */
-    actual fun createTypeAlias(name: String, oldTypeName: String) {
+    actual fun createTypeAlias(name: String) {
         output.writeByte(22)
         output.writeUTF(name)
-        output.writeUTF(oldTypeName)
     }
 
     /**
-     * Create funcalias with name of function with oldFuncName
+     * Create funcalias with [name]
      * @param name Name of new function
-     * @param oldFuncName Name of alias function
      */
-    actual fun createFuncAlias(name: String, oldFuncName: String) {
+    actual fun createFuncAlias(name: String) {
         output.writeByte(23)
         output.writeUTF(name)
-        output.writeUTF(oldFuncName)
     }
 
     /**
@@ -483,12 +479,10 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Add operator return and return [value]
-     * @param value Returning value
+     * Add operator return and return next value in context
      */
-    actual fun addReturn(value: Any?) {
+    actual fun addReturn() {
         output.writeByte(53)
-        loadValue(value)
     }
 
     /**
