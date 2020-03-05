@@ -191,18 +191,6 @@ actual class TokensCreator actual constructor() {
         output.writeByte(security.value)
     }
 
-    /**
-     * Create parameter with name, type and default value
-     * @param name Name of creating parameter
-     * @param typeName Name of type of parameter
-     * @param defaultValue Default value of parameter
-     */
-    actual fun createParameter(name: String, typeName: String) {
-        output.writeByte(18)
-        output.writeUTF(name)
-        output.writeUTF(typeName)
-    }
-
     fun loadValue(value: Any?) {
         if (value == null) {
             output.write(value)
@@ -231,14 +219,6 @@ actual class TokensCreator actual constructor() {
         else if (value is String) {
             output.writeUTF(value)
         }
-    }
-
-    /**
-     * Call method with name. Master of method is last object in context
-     */
-    actual fun callMethod(name: String) {
-        output.writeByte(20)
-        output.writeUTF(name)
     }
 
     /**
@@ -375,12 +355,10 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create switch operator and push to this variable with [name]
-     * @param name Name of switching variable
+     * Create switch operator
      */
-    actual fun createSwitch(name: String) {
+    actual fun createSwitch() {
         output.writeByte(43)
-        output.writeUTF(name)
     }
 
     /**
@@ -398,12 +376,10 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create with operator for variable with [name]
-     * @param name Name of variable for use in with operator
+     * Create with operator
      */
-    actual fun createWith(name: String) {
+    actual fun createWith() {
         output.writeByte(46)
-        output.writeUTF(name)
     }
 
     /**
@@ -486,12 +462,10 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create new object using operator new and constructor [name].
-     * @param name Name of using constructor
+     * Create new object using operator new
      */
-    actual fun createNew(name: String) {
+    actual fun createNew() {
         output.writeByte(54)
-        output.writeUTF(name)
     }
 
     /**
@@ -626,5 +600,27 @@ actual class TokensCreator actual constructor() {
      */
     actual fun power() {
         output.writeByte(68)
+    }
+
+    /**
+     * Create annotation (attribute in .NET) with [name] and [security]
+     * @param name Name of creating annotation
+     * @param security Security access for this annotation
+     */
+    actual fun createAnnotation(name: String, security: SecurityDegree) {
+        output.writeByte(18)
+        output.writeUTF(name)
+        output.writeByte(security.value)
+    }
+
+    /**
+     * Create collection with [name] and [security]
+     * @param name Name of creating collection
+     * @param security Security access for this collection
+     */
+    actual fun createCollection(name: String, security: SecurityDegree) {
+        output.writeByte(20)
+        output.writeUTF(name)
+        output.writeByte(security.value)
     }
 }

@@ -25,6 +25,18 @@ expect class TokensCreator() {
      * @param security Security access for this interface
      */
     fun createInterface(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    /**
+     * Create annotation (attribute in .NET) with [name] and [security]
+     * @param name Name of creating annotation
+     * @param security Security access for this annotation
+     */
+    fun createAnnotation(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    /**
+     * Create collection with [name] and [security]
+     * @param name Name of creating collection
+     * @param security Security access for this collection
+     */
+    fun createCollection(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
 
     /**
      * Start default block
@@ -87,16 +99,6 @@ expect class TokensCreator() {
      * @param security Security access for this constructor
      */
     fun createConstructor(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-    /**
-     * Create parameter with name, type and default value
-     * @param name Name of creating parameter
-     * @param typeName Name of type of parameter
-     */
-    fun createParameter(name: String, typeName: String)
-    /**
-     * Call method with [name]. Master of method is last object in context
-     */
-    fun callMethod(name: String)
     /**
      * Push variable with [name] or static class with [name] to context
      */
@@ -255,10 +257,9 @@ expect class TokensCreator() {
     fun createElse()
 
     /**
-     * Create switch operator and push to this variable with [name]
-     * @param name Name of switching variable
+     * Create switch operator
      */
-    fun createSwitch(name: String)
+    fun createSwitch()
 
     /**
      * Create case block in current switch operator for checking on next value in context
@@ -271,10 +272,9 @@ expect class TokensCreator() {
     fun createDefault()
 
     /**
-     * Create with operator for variable with [name]
-     * @param name Name of variable for use in with operator
+     * Create with operator
      */
-    fun createWith(name: String)
+    fun createWith()
 
     /**
      * Create while loop or add statement if it is do-while loop
@@ -313,10 +313,9 @@ expect class TokensCreator() {
     fun addReturn()
 
     /**
-     * Create new object using operator new and constructor [name].
-     * @param name Name of using constructor
+     * Create new object using operator new
      */
-    fun createNew(name: String)
+    fun createNew()
 
     /**
      * Create operator of [type] with [returnType]

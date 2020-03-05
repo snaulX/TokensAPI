@@ -132,21 +132,6 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create parameter with name, type and default value
-     * @param name Name of creating parameter
-     * @param typeName Name of type of parameter
-     * @param defaultValue Default value of parameter
-     */
-    actual fun createParameter(name: String, typeName: String) {
-    }
-
-    /**
-     * Call method with name. Master of method is last object in context
-     */
-    actual fun callMethod(name: String) {
-    }
-
-    /**
      * Push variable with name or static class with name to context
      */
     actual fun callLiteral(name: String) {
@@ -266,10 +251,9 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create switch operator and push to this variable with [name]
-     * @param name Name of switching variable
+     * Create switch operator
      */
-    actual fun createSwitch(name: String) {
+    actual fun createSwitch() {
     }
 
     /**
@@ -285,10 +269,9 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create with operator for variable with [name]
-     * @param name Name of variable for use in with operator
+     * Create with operator
      */
-    actual fun createWith(name: String) {
+    actual fun createWith() {
     }
 
     /**
@@ -359,10 +342,9 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Create new object using operator new and constructor [name].
-     * @param name Name of using constructor
+     * Create new object using operator new
      */
-    actual fun createNew(name: String) {
+    actual fun createNew() {
     }
 
     /**
@@ -466,5 +448,21 @@ actual class TokensCreator actual constructor() {
      * Raises the previous number to the power which expresses the following
      */
     actual fun power() {
+    }
+
+    /**
+     * Create annotation (attribute in .NET) with [name] and [security]
+     * @param name Name of creating annotation
+     * @param security Security access for this annotation
+     */
+    actual fun createAnnotation(name: String, security: SecurityDegree) {
+    }
+
+    /**
+     * Create collection with [name] and [security]
+     * @param name Name of creating collection
+     * @param security Security access for this collection
+     */
+    actual fun createCollection(name: String, security: SecurityDegree) {
     }
 }
