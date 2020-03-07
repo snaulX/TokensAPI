@@ -1,354 +1,184 @@
 package com.snaulX.TokensAPI
 
+import com.snaulX.TokensAPI.SecurityDegree.*
+
 expect class TokensCreator() {
-    var header: HeaderType
-    var platform: PlatformType
     /**
-     * Set incrementing line to Tokens code for right printing of errors
+     * Set target compilation file
+     * @param appName Name of compiling app (file)
+     * @param extension Extension of compiling file
+     */
+    fun setOutput(appName: String, extension: String = "tokens")
+    /**
+     * Set target platform for compilation
+     */
+    fun setTargetPlatform(type: PlatformType = PlatformType.Common)
+    /**
+     * Set type of compilation target (Script, File is class and etc.)
+     */
+    fun setHeader(type: HeaderType = HeaderType.Script)
+    /**
+     * Increment line for correct printing of errors
      */
     fun incLine()
-    fun createClass(name: String, security: SecurityDegree = SecurityDegree.PUBLIC, classType: ClassType = ClassType.DEFAULT)
-    fun createMethod(name: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC, funcType: FuncType = FuncType.DEFAULT)
-    fun createField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun createStaticField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun createFinalField(name: String, typeName: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun createExtensionMethod(className: String, methodName: String, returnType: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-    fun markDirective(arguments: List<String>)
     /**
-     * Mark annotation with [name]. Arguments of annotation must be defined in [giveArgument]
-     * @param name Name of annotation
+     * Create class
      */
-    fun markAnnotation(name: String)
+    fun createClass(name: String, type: ClassType = ClassType.DEFAULT, securityDegree: SecurityDegree = PUBLIC)
     /**
-     * Create interface with [name] and [security]
-     * @param name Name of creating interface
-     * @param security Security access for this interface
+     * Create method (function)
      */
-    fun createInterface(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun createFunction(name: String, typeName: String = "", type: FuncType = FuncType.DEFAULT)
     /**
-     * Create annotation (attribute in .NET) with [name] and [security]
-     * @param name Name of creating annotation
-     * @param security Security access for this annotation
+     * Start variables (fields) or properties definition
      */
-    fun createAnnotation(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun startVarDefinition(type: VarType = VarType.DEFAULT, securityDegree: SecurityDegree = PUBLIC)
     /**
-     * Create collection with [name] and [security]
-     * @param name Name of creating collection
-     * @param security Security access for this collection
+     * If [start] equals true - start new block
+     * If [start] equals false - end current block
      */
-    fun createCollection(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
-
+    fun block(start: Boolean)
     /**
-     * Start default block
-     * If in context save class - this function create body of this class
-     * If in context save enum - body of enum
-     * If in context save interface - body of interface
-     * If in context save method - body of method
-     * And other more...
+     * If [start] equals true - start new statement
+     * If [start] equals false - end current statement
      */
-    fun startBlock()
+    fun statement(start: Boolean)
     /**
-     * End block in context
+     * If [start] equals true - start new sequence ([)
+     * If [start] equals false - end current sequence (])
      */
-    fun endBlock()
+    fun sequence(start: Boolean)
     /**
-     * Implement interfaces to class
-     * @param interfaces Names of interfaces which must be implement to class
+     * Call literal
      */
-    fun implementClass(interfaces: List<String>)
+    fun callLiteral(literal: String)
     /**
-     * Override class of other class
-     * @param baseClass Name of overriding class
+     * Insert literal (. or -> in C) or expression (,) separator
      */
-    fun overrideClass(baseClass: String)
+    fun insertSeparator(isLiteral: Boolean = true)
     /**
-     * Add assembly in .NET, Java Archive or Class File in JVM and static library in LLVM
-     * @param libPath Path to adding library
+     * Insert expression (; or \n) end.
+     * Need for correct finding syntax errors
      */
-    fun include(libPath: String)
+    fun insertExprEnd()
     /**
-     * Link tokens library to this file
-     * @param libraryPath Path to linking tokens library
+     * Insert [type] loop
      */
-    fun linkLibrary(libraryPath: String)
-
+    fun insertLoop(type: LoopType)
     /**
-     * Mark label with [name] in this position
-     * @param name Name of marking label
+     * Create label with [name]
      */
-    fun markLabel(name: String)
+    fun insertLabel(name: String)
     /**
-     * Import package with [name]
-     * @param name Name of importing package
+     * Go to label with [name].
+     * Operator goto
+     */
+    fun goToLabel(name: String)
+    /**
+     * If [_break] equals true - insert operator break
+     * If [_break] equals false - insert operator continue
+     */
+    fun insertLoopOperator(_break: Boolean, labelName: String = "")
+    /**
+     * Call [type] operator
+     */
+    fun callOperator(type: OperatorType)
+    /**
+     * Call [value]
+     */
+    fun callValue(value: Any?)
+    /**
+     * Insert nullable (?) operator
+     */
+    fun insertNullable()
+    /**
+     * Insert switch operator
+     */
+    fun insertSwitch()
+    /**
+     * Insert case operator.
+     * P.S. If you need 'default' operator - use insertCase() and callLiteral("_")
+     */
+    fun insertCase()
+    /**
+     * Insert directive
+     */
+    fun insertDirective(arguments: List<String>)
+    /**
+     * Insert operator new
+     */
+    fun insertNew()
+    /**
+     * Insert start of annotation
+     */
+    fun insertAnnotation()
+    /**
+     * Insert throw operator
+     */
+    fun throwException()
+    /**
+     * Start try block
+     */
+    fun insertTry()
+    /**
+     * Start catch block
+     */
+    fun insertCatch()
+    /**
+     * Start finally block
+     */
+    fun insertFinally()
+    /**
+     * Start new if block
+     */
+    fun insertIf()
+    /**
+     * Start else block.
+     * P.S. If you find how make elif - use insertIf() and insertElse()
+     */
+    fun insertElse()
+    /**
+     * Insert return operator
+     */
+    fun insertReturn()
+    /**
+     * Insert except or actual modifer
+     */
+    fun insertActual(actual: Boolean = true)
+    /**
+     * Insert typeof operator
+     */
+    fun checkTypeOf(name: String)
+    /**
+     * Set package or namespace with [name]
+     */
+    fun setPackage(name: String)
+    /**
+     * Import tokens library with [name]
+     */
+    fun importLibrary(name: String)
+    /**
+     * Import package or use namespace with [name]
      */
     fun importPackage(name: String)
     /**
-     * Create package with [name] for writing next context to this package
-     * @param name Name of creating package
+     * Include VM library with [name]
      */
-    fun markPackage(name: String)
+    fun include(name: String)
     /**
-     * Create enum or enum class in context with name, security
-     * @param name Name of creating enum
-     * @param security Security access for this enum
+     * Insert breakpoint (for debugger)
      */
-    fun createEnum(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun insertBreakpoint()
     /**
-     * Create constructor in class of context
-     * @param name Name of creating constructor
-     * @param security Security access for this constructor
+     * Convert to type with [name]
      */
-    fun createConstructor(name: String, security: SecurityDegree = SecurityDegree.PUBLIC)
+    fun convertTo(name: String)
     /**
-     * Push variable with [name] or static class with [name] to context
+     * Implements of [interfaces]
      */
-    fun callLiteral(name: String)
-
+    fun implements(interfaces: List<String>)
     /**
-     * Set output file for writing tokens to this file and write to this file [header]
-     * @param fileName Name of file which be output
+     * Extends of class by [name]
      */
-    fun setOutput(fileName: String)
-
-    /**
-     * Create typealias with [name] of type
-     * @param name New type name
-     */
-    fun createTypeAlias(name: String)
-
-    /**
-     * Create funcalias with [name]
-     * @param name Name of new function
-     */
-    fun createFuncAlias(name: String)
-    /**
-     * Mark break operator in this position
-     */
-    fun markBreak()
-    /**
-     * Mark goto operator in this position for [name] label
-     * @param name Name of label which going to
-     */
-    fun goto(name: String)
-
-    /**
-     * Mark continue operator in this position
-     */
-    fun markContinue()
-
-    /**
-     * Mark breakpoint
-     */
-    fun markBreakpoint()
-
-    /**
-     * Open new statement in context and add to this while statement will not close
-     */
-    fun openStatement()
-
-    /**
-     * Close current statement in context
-     */
-    fun closeStatement()
-
-    /**
-     * Add previous value from context and next
-     */
-    fun add()
-
-    /**
-     * Subtract previous value from context and next
-     */
-    fun subtract()
-
-    /**
-     * Divide previous value from context and next
-     */
-    fun divide()
-
-    /**
-     * Multiply previous value from context and next
-     */
-    fun multiply()
-
-    /**
-     * Operator modulo '%'
-     */
-    fun modulo()
-
-    /**
-     * Raises the previous number to the power which expresses the following
-     */
-    fun power()
-
-    /**
-     * Operator of increment
-     */
-    fun increment()
-
-    /**
-     * Operator of decrement
-     */
-    fun decrement()
-
-    /**
-     * Return inversion value or just operator not
-     */
-    fun inversion()
-
-    /**
-     * Operator and
-     */
-    fun and()
-
-    /**
-     * Operator or
-     */
-    fun or()
-
-    /**
-     * Operator xor
-     */
-    fun xor()
-
-    /**
-     * Compares for equality previous value from context and next
-     */
-    fun equals()
-
-    /**
-     * Compares for not equality previous value from context and next
-     */
-    fun notEquals()
-
-    /**
-     * Compares for greater previous value from context then next
-     */
-    fun greaterThen()
-
-    /**
-     * Compares for less previous value from context then next
-     */
-    fun lessThen()
-
-    /**
-     * Compares for greater or equals previous value from context then next
-     */
-    fun greaterOrEqualsThen()
-
-    /**
-     * Compares for less or equals previous value from context then next
-     */
-    fun lessOrEqualsThen()
-
-    /**
-     * Create if operator and make new if construction. Next statement will push into this if
-     */
-    fun createIf()
-
-    /**
-     * Create else if operator and continue current if construction. Next statement will push into this if
-     */
-    fun createElseIf()
-
-    /**
-     * Create else operator and close current if construction
-     */
-    fun createElse()
-
-    /**
-     * Create switch operator
-     */
-    fun createSwitch()
-
-    /**
-     * Create case block in current switch operator for checking on next value in context
-     */
-    fun createCase()
-
-    /**
-     * Create default block in current switch operator
-     */
-    fun createDefault()
-
-    /**
-     * Create with operator
-     */
-    fun createWith()
-
-    /**
-     * Create while loop or add statement if it is do-while loop
-     */
-    fun createWhile()
-
-    /**
-     * Create do-while loop and do block
-     */
-    fun createDo()
-
-    /**
-     * Create for loop with three parameters (parameters writing using statements)
-     */
-    fun createFor()
-
-    /**
-     * Create foreach loop
-     */
-    fun createForeach()
-
-    /**
-     * Add in operator
-     */
-    fun addIn()
-
-    /**
-     * Get element in collection by index.
-     * In a lot of languages it is operator \[index\]
-     */
-    fun getByIndex(index: Int)
-
-    /**
-     * Add operator return and return next value in context
-     */
-    fun addReturn()
-
-    /**
-     * Create new object using operator new
-     */
-    fun createNew()
-
-    /**
-     * Create operator of [type] with [returnType]
-     * @param type Type of operator
-     * @param returnType Type of returning value
-     */
-    fun createOperator(type: OperatorType, returnType: String)
-
-    /**
-     * Convert next statement to [typeName]
-     * @param typeName Name of type for convert to
-     */
-    fun convertTo(typeName: String)
-
-    /**
-     * Add operator is (compare type of last object from context with type by [typeName])
-     * @param typeName Name of compareble type
-     */
-    fun addIs(typeName: String)
-
-    /**
-     * Add operator typeof (get type by [typeName])
-     * @param typeName Name of getting type
-     */
-    fun checkTypeof(typeName: String)
-
-    /**
-     * Add operator of assign
-     */
-    fun assignValue()
-
-    /**
-     * Throw exception with next object in context
-     */
-    fun throwException()
+    fun extends(name: String)
 }

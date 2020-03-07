@@ -16,5 +16,9 @@ enum class PlatformType(val value: Byte) {
     /**
      * Code for TokensBuilder.NET
      */
-    DotNet(3)
+    DotNet(3),
+    /**
+     * Code for user platform. Name of platform writing in next string in file
+     */
+    Other(4)
 }
