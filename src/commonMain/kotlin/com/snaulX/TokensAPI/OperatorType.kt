@@ -35,5 +35,6 @@ enum class OperatorType(val value: Byte) {
      * Less or equals
      */
     LORE(27),
-    RANGE(28)
+    RANGE(28),
+    POW(29)
 }

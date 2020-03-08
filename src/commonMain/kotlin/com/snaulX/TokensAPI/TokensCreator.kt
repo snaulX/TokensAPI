@@ -185,4 +185,12 @@ expect class TokensCreator() {
      * Insert operator is (instanceof in Java)
      */
     fun instanceOf(name: String)
+    /**
+     * Insert operator with
+     */
+    fun insertWith()
+    /**
+     * Insert operator yield
+     */
+    fun insertYield()
 }

@@ -271,4 +271,16 @@ actual class TokensCreator actual constructor() {
      */
     actual fun instanceOf(name: String) {
     }
+
+    /**
+     * Insert operator with
+     */
+    actual fun insertWith() {
+    }
+
+    /**
+     * Insert operator yield
+     */
+    actual fun insertYield() {
+    }
 }

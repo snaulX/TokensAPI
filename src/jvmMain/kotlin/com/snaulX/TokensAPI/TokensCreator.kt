@@ -373,4 +373,18 @@ actual class TokensCreator actual constructor() {
         output.writeByte(39)
         output.writeUTF(name)
     }
+
+    /**
+     * Insert operator with
+     */
+    actual fun insertWith() {
+        output.writeByte(40)
+    }
+
+    /**
+     * Insert operator yield
+     */
+    actual fun insertYield() {
+        output.writeByte(41)
+    }
 }
