@@ -8,6 +8,9 @@ enum class HeaderType (val value: Byte) {
      * Can will writing in file constructors
      */
     Class(1),
+    /**
+     * Compile to VM library
+     */
     Library(2),
     /**
      * Compile to executable console program
@@ -17,6 +20,10 @@ enum class HeaderType (val value: Byte) {
      * Compile to executable program without console
      */
     GUI(4),
+    /**
+     * Flag means that this file cannot be compile.
+     * On compilation this file just optimizing.
+     */
     TokensLibrary(5),
     /**
      * Script for building project.

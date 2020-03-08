@@ -265,4 +265,10 @@ actual class TokensCreator actual constructor() {
      */
     actual fun extends(name: String) {
     }
+
+    /**
+     * Insert operator is (instanceof in Java)
+     */
+    actual fun instanceOf(name: String) {
+    }
 }

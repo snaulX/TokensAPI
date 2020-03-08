@@ -181,4 +181,8 @@ expect class TokensCreator() {
      * Extends of class by [name]
      */
     fun extends(name: String)
+    /**
+     * Insert operator is (instanceof in Java)
+     */
+    fun instanceOf(name: String)
 }

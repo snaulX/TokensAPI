@@ -1,6 +1,6 @@
 package com.snaulX.TokensAPI
 
-enum class ClassType(val tokens_code: Byte) {
+enum class ClassType(val value: Byte) {
     DEFAULT(0),
     FINAL(1),
     ABSTRACT(2),
