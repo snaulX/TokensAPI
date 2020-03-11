@@ -103,7 +103,7 @@ expect class TokensCreator() {
     /**
      * Insert directive
      */
-    fun insertDirective(arguments: List<String>)
+    fun insertDirective()
     /**
      * Insert operator new
      */
@@ -174,13 +174,13 @@ expect class TokensCreator() {
      */
     fun convertTo(name: String)
     /**
-     * Implements of [interfaces]
+     * Implements of next strings
      */
-    fun implements(interfaces: List<String>)
+    fun implements()
     /**
-     * Extends of class by [name]
+     * Extends of class
      */
-    fun extends(name: String)
+    fun extends()
     /**
      * Insert operator is (instanceof in Java)
      */

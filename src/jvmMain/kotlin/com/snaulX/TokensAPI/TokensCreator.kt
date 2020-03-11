@@ -212,12 +212,8 @@ actual class TokensCreator actual constructor() {
     /**
      * Insert directive
      */
-    actual fun insertDirective(arguments: List<String>) {
+    actual fun insertDirective() {
         output.writeByte(19)
-        output.writeInt(arguments.size)
-        for (arg in arguments) {
-            output.writeUTF(arg)
-        }
     }
 
     /**
@@ -348,22 +344,17 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Implements of [interfaces]
+     * Implements of next strings
      */
-    actual fun implements(interfaces: List<String>) {
+    actual fun implements() {
         output.writeByte(37)
-        output.writeInt(interfaces.size)
-        for (i in interfaces) {
-            output.writeUTF(i)
-        }
     }
 
     /**
-     * Extends of class by [name]
+     * Extends of class
      */
-    actual fun extends(name: String) {
+    actual fun extends() {
         output.writeByte(38)
-        output.writeUTF(name)
     }
 
     /**

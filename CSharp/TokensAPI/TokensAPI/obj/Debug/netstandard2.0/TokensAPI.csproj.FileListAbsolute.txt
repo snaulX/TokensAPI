@@ -1,0 +1,8 @@
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\bin\Debug\netstandard2.0\TokensAPI.deps.json
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\bin\Debug\netstandard2.0\TokensAPI.dll
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\bin\Debug\netstandard2.0\TokensAPI.pdb
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.csprojAssemblyReference.cache
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.AssemblyInfo.cs
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.dll
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.pdb

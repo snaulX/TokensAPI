@@ -148,7 +148,7 @@ actual class TokensCreator actual constructor() {
     /**
      * Insert directive
      */
-    actual fun insertDirective(arguments: List<String>) {
+    actual fun insertDirective() {
     }
 
     /**
@@ -255,15 +255,15 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Implements of [interfaces]
+     * Implements of next strings
      */
-    actual fun implements(interfaces: List<String>) {
+    actual fun implements() {
     }
 
     /**
-     * Extends of class by [name]
+     * Extends of class
      */
-    actual fun extends(name: String) {
+    actual fun extends() {
     }
 
     /**
