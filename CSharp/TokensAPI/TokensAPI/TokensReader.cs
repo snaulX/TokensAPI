@@ -3,16 +3,16 @@ using System.IO;
 
 namespace TokensAPI
 {
-    public class TokensBuilder
+    public class TokensReader
     {
         public BinaryReader reader;
 
-        public TokensBuilder()
+        public TokensReader()
         {
             //pass
         }
 
-        public TokensBuilder(BinaryReader br)
+        public TokensReader(BinaryReader br)
         {
             reader = br;
         }

@@ -8,5 +8,6 @@ namespace TokensAPI
     {
         public SecurityDegree security;
         public ClassType type;
+        public string name;
     }
 }
