@@ -174,16 +174,46 @@ actual class TokensCreator actual constructor() {
     actual fun callValue(value: Any?) {
         output.writeByte(15)
         when (value) {
-            null -> output.write(null)
-            is Int -> output.writeInt(value)
-            is String -> output.writeUTF(value)
-            is Byte -> output.writeByte(value)
-            is Boolean -> output.writeBoolean(value)
-            is Char -> output.writeChar(value.toInt())
-            is Float -> output.writeFloat(value)
-            is Short -> output.writeShort(value.toInt())
-            is Long -> output.writeLong(value)
-            is Double -> output.writeDouble(value)
+            null -> {
+                output.writeByte(0)
+                output.write(null)
+            }
+            is Int -> {
+                output.writeByte(1)
+                output.writeInt(value)
+            }
+            is String -> {
+                output.writeByte(2)
+                output.writeUTF(value)
+            }
+            is Byte -> {
+                output.writeByte(3)
+                output.writeByte(value)
+            }
+            is Boolean -> {
+                output.writeByte(4)
+                output.writeBoolean(value)
+            }
+            is Char -> {
+                output.writeByte(5)
+                output.writeChar(value.toInt())
+            }
+            is Float -> {
+                output.writeByte(6)
+                output.writeFloat(value)
+            }
+            is Short -> {
+                output.writeByte(7)
+                output.writeShort(value.toInt())
+            }
+            is Long -> {
+                output.writeByte(8)
+                output.writeLong(value)
+            }
+            is Double -> {
+                output.writeByte(9)
+                output.writeDouble(value)
+            }
         }
     }
 
@@ -276,8 +306,9 @@ actual class TokensCreator actual constructor() {
     /**
      * Insert return operator
      */
-    actual fun insertReturn() {
+    actual fun insertReturn(short: Boolean) {
         output.writeByte(28)
+        output.writeBoolean(short)
     }
 
     /**
@@ -377,5 +408,13 @@ actual class TokensCreator actual constructor() {
      */
     actual fun insertYield() {
         output.writeByte(41)
+    }
+
+    /**
+     * Insert lambda or after case operator
+     */
+    actual fun insertLambda(lambda: Boolean) {
+        output.writeByte(42)
+        output.writeBoolean(lambda)
     }
 }

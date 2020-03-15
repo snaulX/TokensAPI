@@ -203,7 +203,7 @@ actual class TokensCreator actual constructor() {
     /**
      * Insert return operator
      */
-    actual fun insertReturn() {
+    actual fun insertReturn(short: Boolean) {
     }
 
     /**
@@ -282,5 +282,11 @@ actual class TokensCreator actual constructor() {
      * Insert operator yield
      */
     actual fun insertYield() {
+    }
+
+    /**
+     * Insert lambda or after case operator
+     */
+    actual fun insertLambda(lambda: Boolean) {
     }
 }

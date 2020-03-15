@@ -140,7 +140,7 @@ expect class TokensCreator() {
     /**
      * Insert return operator
      */
-    fun insertReturn()
+    fun insertReturn(short: Boolean = false)
     /**
      * Insert except or actual modifer
      */
@@ -193,4 +193,8 @@ expect class TokensCreator() {
      * Insert operator yield
      */
     fun insertYield()
+    /**
+     * Insert lambda or after case operator
+     */
+    fun insertLambda(lambda: Boolean = true)
 }
