@@ -170,10 +170,6 @@ expect class TokensCreator() {
      */
     fun insertBreakpoint()
     /**
-     * Convert to type with [name]
-     */
-    fun convertTo(name: String)
-    /**
      * Implements of next strings
      */
     fun implements()

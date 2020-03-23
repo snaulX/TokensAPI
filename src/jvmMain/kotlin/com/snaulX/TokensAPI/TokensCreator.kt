@@ -367,14 +367,6 @@ actual class TokensCreator actual constructor() {
     }
 
     /**
-     * Convert to type with [name]
-     */
-    actual fun convertTo(name: String) {
-        output.writeByte(36)
-        output.writeUTF(name)
-    }
-
-    /**
      * Implements of next strings
      */
     actual fun implements() {

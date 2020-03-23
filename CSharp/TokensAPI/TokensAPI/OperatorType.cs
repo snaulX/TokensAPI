@@ -24,19 +24,18 @@
         DIVASSIGN = 19,
         MODASSIGN = 20,
         CONVERTTO = 21,
-        GETBYINDEX = 22,
-        INC = 23,
-        DEC = 24,
-        IN = 25,
+        INC = 22,
+        DEC = 23,
+        IN = 24,
         /**
          * Greater or equals
          */
-        GORE = 26,
+        GORE = 25,
         /**
          * Less or equals
          */
-        LORE = 27,
-        RANGE = 28,
-        POW = 29
+        LORE = 26,
+        RANGE = 27,
+        POW = 28
     }
 }

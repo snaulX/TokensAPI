@@ -47,6 +47,7 @@ namespace TokensAPI
         EXTENDS = 38,
         INSTANCEOF = 39,
         WITH = 40,
-        YIELD = 41
+        YIELD = 41,
+        LAMBDA = 42
     }
 }
