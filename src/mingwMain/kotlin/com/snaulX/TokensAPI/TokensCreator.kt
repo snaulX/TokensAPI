@@ -39,7 +39,7 @@ actual class TokensCreator actual constructor() {
     /**
      * Create method (function)
      */
-    actual fun createFunction(name: String, typeName: String, type: FuncType) {
+    actual fun createFunction(name: String, typeName: String, type: FuncType, securityDegree: SecurityDegree) {
     }
 
     /**

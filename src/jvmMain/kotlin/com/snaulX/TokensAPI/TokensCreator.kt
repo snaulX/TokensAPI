@@ -58,11 +58,12 @@ actual class TokensCreator actual constructor() {
     /**
      * Create method (function)
      */
-    actual fun createFunction(name: String, typeName: String, type: FuncType) {
+    actual fun createFunction(name: String, typeName: String, type: FuncType, securityDegree: SecurityDegree) {
         output.writeByte(2)
         output.writeUTF(name)
         output.writeUTF(typeName)
         output.writeByte(type.value)
+        output.writeByte(securityDegree.value)
     }
 
     /**
@@ -176,7 +177,6 @@ actual class TokensCreator actual constructor() {
         when (value) {
             null -> {
                 output.writeByte(0)
-                output.write(null)
             }
             is Int -> {
                 output.writeByte(1)

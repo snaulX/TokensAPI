@@ -12,6 +12,11 @@ namespace TokensAPI
         public List<TokenType> tokens;
         public List<byte> byte_values;
         public List<object> values;
+        public List<SecurityDegree> securities;
+        public List<FuncType> function_types;
+        public List<VarType> var_types;
+        public List<LoopType> loops;
+        public List<OperatorType> operators;
 
         public TokensReader()
         {
@@ -20,6 +25,10 @@ namespace TokensAPI
             tokens = new List<TokenType>();
             byte_values = new List<byte>();
             values = new List<object>();
+            securities = new List<SecurityDegree>();
+            function_types = new List<FuncType>();
+            loops = new List<LoopType>();
+            operators = new List<OperatorType>();
         }
 
         public TokensReader(string path) : this()
@@ -58,18 +67,63 @@ namespace TokensAPI
             {
                 TokenType token = (TokenType) reader.ReadByte();
                 tokens.Add(token);
-                switch (token)
+                if (token == TokenType.CLASS)
                 {
-                    case TokenType.CLASS:
-                        string_values.Add(reader.ReadString()); //name of class
-                        byte_values.Add(reader.ReadByte()); //class type
-                        byte_values.Add(reader.ReadByte()); //security degree
-                        break;
-                    case TokenType.FUNCTION:
-                        string_values.Add(reader.ReadString()); //name of function
-                        string_values.Add(reader.ReadString()); //name of return tye of function
-                        byte_values.Add(reader.ReadByte()); //type of function
-                        break;
+                    string_values.Add(reader.ReadString()); //name of class
+                    byte_values.Add(reader.ReadByte()); //class type
+                    securities.Add((SecurityDegree) reader.ReadByte()); //security degree
+                }
+                else if (token == TokenType.FUNCTION)
+                {
+                    string_values.Add(reader.ReadString()); //name of function
+                    string_values.Add(reader.ReadString()); //name of return tye of function
+                    function_types.Add((FuncType) reader.ReadByte()); //type of function
+                    securities.Add((SecurityDegree)reader.ReadByte()); //security degree
+                }
+                else if (token == TokenType.VAR)
+                {
+                    var_types.Add((VarType)reader.ReadByte());
+                    securities.Add((SecurityDegree)reader.ReadByte());
+                }
+                else if (token == TokenType.BLOCK || token == TokenType.STATEMENT || token == TokenType.SEQUENCE
+                    || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA
+                    || token == TokenType.ACTUAL)
+                {
+                    bool_values.Add(reader.ReadBoolean());
+                }
+                else if (token == TokenType.LITERAL || token == TokenType.TYPEOF || token == TokenType.NAMESPACE
+                    || token == TokenType.IMPORT_LIBRARY || token == TokenType.INCLUDE || token == TokenType.USING_NAMESPACE
+                    || token == TokenType.INSTANCEOF || token == TokenType.GOTO || token == TokenType.LABEL)
+                {
+                    string_values.Add(reader.ReadString());
+                }
+                else if (token == TokenType.LOOP)
+                {
+                    loops.Add((LoopType)reader.ReadByte());
+                }
+                else if (token == TokenType.LOOP_OPERATOR)
+                {
+                    bool_values.Add(reader.ReadBoolean());
+                    string_values.Add(reader.ReadString());
+                }
+                else if (token == TokenType.OPERATOR)
+                {
+                    operators.Add((OperatorType)reader.ReadByte());
+                }
+                else if (token == TokenType.VALUE)
+                {
+                    byte valtype = reader.ReadByte();
+                    byte_values.Add(valtype);
+                    if (valtype == 0) values.Add(null);
+                    else if (valtype == 1) values.Add(reader.ReadInt32());
+                    else if (valtype == 2) values.Add(reader.ReadString());
+                    else if (valtype == 3) values.Add(reader.ReadByte());
+                    else if (valtype == 4) values.Add(reader.ReadBoolean());
+                    else if (valtype == 5) values.Add(reader.ReadChar());
+                    else if (valtype == 6) values.Add(reader.ReadSingle());
+                    else if (valtype == 7) values.Add(reader.ReadInt16());
+                    else if (valtype == 8) values.Add(reader.ReadInt64());
+                    else if (valtype == 9) values.Add(reader.ReadDouble());
                 }
             }
         }

@@ -28,7 +28,7 @@ expect class TokensCreator() {
     /**
      * Create method (function)
      */
-    fun createFunction(name: String, typeName: String = "", type: FuncType = FuncType.DEFAULT)
+    fun createFunction(name: String, typeName: String = "", type: FuncType = FuncType.DEFAULT, securityDegree: SecurityDegree = PUBLIC)
     /**
      * Start variables (fields) or properties definition
      */
