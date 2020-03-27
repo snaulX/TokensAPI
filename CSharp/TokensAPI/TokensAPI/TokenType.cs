@@ -38,12 +38,11 @@
         USING_NAMESPACE = 33,
         INCLUDE = 34,
         BREAKPOINT = 35,
-        CONVERT = 36,
-        IMPLEMENTS = 37,
-        EXTENDS = 38,
-        INSTANCEOF = 39,
-        WITH = 40,
-        YIELD = 41,
-        LAMBDA = 42
+        IMPLEMENTS = 36,
+        EXTENDS = 37,
+        INSTANCEOF = 38,
+        WITH = 39,
+        YIELD = 40,
+        LAMBDA = 41
     }
 }

@@ -6,3 +6,4 @@ C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug
 C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.AssemblyInfo.cs
 C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.dll
 C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.pdb
+C:\Users\User\Desktop\snaulX\Mino\TokensAPI\CSharp\TokensAPI\TokensAPI\obj\Debug\netstandard2.0\TokensAPI.csproj.CoreCompileInputs.cache
