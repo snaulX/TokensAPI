@@ -370,21 +370,21 @@ actual class TokensCreator actual constructor() {
      * Implements of next strings
      */
     actual fun implements() {
-        output.writeByte(37)
+        output.writeByte(36)
     }
 
     /**
      * Extends of class
      */
     actual fun extends() {
-        output.writeByte(38)
+        output.writeByte(37)
     }
 
     /**
      * Insert operator is (instanceof in Java)
      */
     actual fun instanceOf(name: String) {
-        output.writeByte(39)
+        output.writeByte(38)
         output.writeUTF(name)
     }
 
@@ -392,21 +392,21 @@ actual class TokensCreator actual constructor() {
      * Insert operator with
      */
     actual fun insertWith() {
-        output.writeByte(40)
+        output.writeByte(39)
     }
 
     /**
      * Insert operator yield
      */
     actual fun insertYield() {
-        output.writeByte(41)
+        output.writeByte(40)
     }
 
     /**
      * Insert lambda or after case operator
      */
     actual fun insertLambda(lambda: Boolean) {
-        output.writeByte(42)
+        output.writeByte(41)
         output.writeBoolean(lambda)
     }
 }

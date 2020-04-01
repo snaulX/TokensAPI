@@ -17,6 +17,7 @@ namespace TokensAPI
         public List<VarType> var_types;
         public List<LoopType> loops;
         public List<OperatorType> operators;
+        public List<ClassType> class_types;
 
         public TokensReader()
         {
@@ -29,6 +30,7 @@ namespace TokensAPI
             function_types = new List<FuncType>();
             loops = new List<LoopType>();
             operators = new List<OperatorType>();
+            class_types = new List<ClassType>();
         }
 
         public TokensReader(string path) : this()
@@ -66,11 +68,12 @@ namespace TokensAPI
             while (reader.Read() != -1)
             {
                 TokenType token = (TokenType) reader.ReadByte();
+                Console.WriteLine($"Token: {token}, code: {(byte) token}");
                 tokens.Add(token);
                 if (token == TokenType.CLASS)
                 {
                     string_values.Add(reader.ReadString()); //name of class
-                    byte_values.Add(reader.ReadByte()); //class type
+                    class_types.Add((ClassType) reader.ReadByte()); //class type
                     securities.Add((SecurityDegree) reader.ReadByte()); //security degree
                 }
                 else if (token == TokenType.FUNCTION)
@@ -126,6 +129,22 @@ namespace TokensAPI
                     else if (valtype == 9) values.Add(reader.ReadDouble());
                 }
             }
+            Console.WriteLine("STRING VALUES");
+            Console.WriteLine(string.Join("\n", string_values));
+            Console.WriteLine("BOOL");
+            Console.WriteLine(string.Join("\n", bool_values));
+            Console.WriteLine("BYTE");
+            Console.WriteLine(string.Join("\n", byte_values));
+            Console.WriteLine("LOOPS");
+            Console.WriteLine(string.Join("\n", loops));
+            Console.WriteLine("SECURITIES");
+            Console.WriteLine(string.Join("\n", securities));
+            Console.WriteLine("CLASS TYPES");
+            Console.WriteLine(string.Join("\n", class_types));
+            Console.WriteLine("VAR TYPES");
+            Console.WriteLine(string.Join("\n", var_types));
+            Console.WriteLine("FUNCTION TYPES");
+            Console.WriteLine(string.Join("\n", function_types));
         }
 
         public void EndWork()
