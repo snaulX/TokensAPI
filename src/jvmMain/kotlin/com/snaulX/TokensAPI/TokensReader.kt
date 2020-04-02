@@ -1,5 +1,9 @@
 package com.snaulX.TokensAPI
 
+import com.snaulX.TokensAPI.EnumConverter.toClassType
+import com.snaulX.TokensAPI.EnumConverter.toHeaderType
+import com.snaulX.TokensAPI.EnumConverter.toSecurityDegree
+import com.snaulX.TokensAPI.EnumConverter.toTokenType
 import com.snaulX.TokensAPI.TokenType.*
 import java.io.DataInputStream
 import java.io.FileInputStream
@@ -19,13 +23,7 @@ actual class TokensReader {
     actual val operators: MutableList<OperatorType> = mutableListOf()
     actual val values: MutableList<Any> = mutableListOf()
 
-    actual fun getHeader(): HeaderType {
-        val value: Byte = reader.readByte()
-        for (type: HeaderType in HeaderType.values()) {
-            if (type.value == value) return type
-        }
-        throw InvalidHeaderException("Unknown header with code $value")
-    }
+    actual fun getHeader(): HeaderType = reader.readByte().toHeaderType()
 
     actual fun getTarget(): String = when (reader.readByte()) {
             PlatformType.Common.value -> "COMMON"
@@ -42,20 +40,13 @@ actual class TokensReader {
     actual fun readTokens() {
         while (true) {
             try {
-                val tokenCode: Byte = reader.readByte()
-                var token: TokenType = NEWLN
-                for (tokenType: TokenType in values()) {
-                    if (tokenType.value == tokenCode) {
-                        token = tokenType
-                        break
-                    }
-                }
+                val token: TokenType = reader.readByte().toTokenType()
                 tokens.add(token)
                 when (token) {
                     CLASS -> {
                         stringValues.add(reader.readUTF())
-                        //classTypes.add(reader.readByte())
-                        //securities.add(reader.readByte())
+                        classTypes.add(reader.readByte().toClassType())
+                        securities.add(reader.readByte().toSecurityDegree())
                     }
                 }
             } catch (e: IOException) {
