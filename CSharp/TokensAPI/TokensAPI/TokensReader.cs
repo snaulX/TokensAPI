@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 namespace TokensAPI
 {
@@ -65,86 +65,97 @@ namespace TokensAPI
 
         public void ReadTokens()
         {
-            while (reader.Read() != -1)
+            while (true)
             {
-                TokenType token = (TokenType) reader.ReadByte();
-                Console.WriteLine($"Token: {token}, code: {(byte) token}");
-                tokens.Add(token);
-                if (token == TokenType.CLASS)
+                try
                 {
-                    string_values.Add(reader.ReadString()); //name of class
-                    class_types.Add((ClassType) reader.ReadByte()); //class type
-                    securities.Add((SecurityDegree) reader.ReadByte()); //security degree
+                    TokenType token = (TokenType)reader.ReadByte();
+                    Console.WriteLine($"Token: {token}, code: {(byte)token}");
+                    tokens.Add(token);
+                    if (token == TokenType.CLASS)
+                    {
+                        string_values.Add(reader.ReadString()); //name of class
+                        class_types.Add((ClassType)reader.ReadByte()); //class type
+                        securities.Add((SecurityDegree)reader.ReadByte()); //security degree
+                    }
+                    else if (token == TokenType.FUNCTION)
+                    {
+                        string_values.Add(reader.ReadString()); //name of function
+                        string_values.Add(reader.ReadString()); //name of return tye of function
+                        function_types.Add((FuncType)reader.ReadByte()); //type of function
+                        securities.Add((SecurityDegree)reader.ReadByte()); //security degree
+                    }
+                    else if (token == TokenType.VAR)
+                    {
+                        var_types.Add((VarType)reader.ReadByte());
+                        securities.Add((SecurityDegree)reader.ReadByte());
+                    }
+                    else if (token == TokenType.BLOCK || token == TokenType.STATEMENT || token == TokenType.SEQUENCE
+                        || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA
+                        || token == TokenType.ACTUAL)
+                    {
+                        bool_values.Add(reader.ReadBoolean());
+                    }
+                    else if (token == TokenType.LITERAL || token == TokenType.TYPEOF || token == TokenType.NAMESPACE
+                        || token == TokenType.IMPORT_LIBRARY || token == TokenType.INCLUDE || token == TokenType.USING_NAMESPACE
+                        || token == TokenType.INSTANCEOF || token == TokenType.GOTO || token == TokenType.LABEL)
+                    {
+                        string_values.Add(reader.ReadString());
+                    }
+                    else if (token == TokenType.LOOP)
+                    {
+                        loops.Add((LoopType)reader.ReadByte());
+                    }
+                    else if (token == TokenType.LOOP_OPERATOR)
+                    {
+                        bool_values.Add(reader.ReadBoolean());
+                        string_values.Add(reader.ReadString());
+                    }
+                    else if (token == TokenType.OPERATOR)
+                    {
+                        operators.Add((OperatorType)reader.ReadByte());
+                    }
+                    else if (token == TokenType.VALUE)
+                    {
+                        byte valtype = reader.ReadByte();
+                        byte_values.Add(valtype);
+                        if (valtype == 0) values.Add(null);
+                        else if (valtype == 1) values.Add(reader.ReadInt32());
+                        else if (valtype == 2) values.Add(reader.ReadString());
+                        else if (valtype == 3) values.Add(reader.ReadByte());
+                        else if (valtype == 4) values.Add(reader.ReadBoolean());
+                        else if (valtype == 5) values.Add(reader.ReadChar());
+                        else if (valtype == 6) values.Add(reader.ReadSingle());
+                        else if (valtype == 7) values.Add(reader.ReadInt16());
+                        else if (valtype == 8) values.Add(reader.ReadInt64());
+                        else if (valtype == 9) values.Add(reader.ReadDouble());
+                    }
                 }
-                else if (token == TokenType.FUNCTION)
+                catch
                 {
-                    string_values.Add(reader.ReadString()); //name of function
-                    string_values.Add(reader.ReadString()); //name of return tye of function
-                    function_types.Add((FuncType) reader.ReadByte()); //type of function
-                    securities.Add((SecurityDegree)reader.ReadByte()); //security degree
-                }
-                else if (token == TokenType.VAR)
-                {
-                    var_types.Add((VarType)reader.ReadByte());
-                    securities.Add((SecurityDegree)reader.ReadByte());
-                }
-                else if (token == TokenType.BLOCK || token == TokenType.STATEMENT || token == TokenType.SEQUENCE
-                    || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA
-                    || token == TokenType.ACTUAL)
-                {
-                    bool_values.Add(reader.ReadBoolean());
-                }
-                else if (token == TokenType.LITERAL || token == TokenType.TYPEOF || token == TokenType.NAMESPACE
-                    || token == TokenType.IMPORT_LIBRARY || token == TokenType.INCLUDE || token == TokenType.USING_NAMESPACE
-                    || token == TokenType.INSTANCEOF || token == TokenType.GOTO || token == TokenType.LABEL)
-                {
-                    string_values.Add(reader.ReadString());
-                }
-                else if (token == TokenType.LOOP)
-                {
-                    loops.Add((LoopType)reader.ReadByte());
-                }
-                else if (token == TokenType.LOOP_OPERATOR)
-                {
-                    bool_values.Add(reader.ReadBoolean());
-                    string_values.Add(reader.ReadString());
-                }
-                else if (token == TokenType.OPERATOR)
-                {
-                    operators.Add((OperatorType)reader.ReadByte());
-                }
-                else if (token == TokenType.VALUE)
-                {
-                    byte valtype = reader.ReadByte();
-                    byte_values.Add(valtype);
-                    if (valtype == 0) values.Add(null);
-                    else if (valtype == 1) values.Add(reader.ReadInt32());
-                    else if (valtype == 2) values.Add(reader.ReadString());
-                    else if (valtype == 3) values.Add(reader.ReadByte());
-                    else if (valtype == 4) values.Add(reader.ReadBoolean());
-                    else if (valtype == 5) values.Add(reader.ReadChar());
-                    else if (valtype == 6) values.Add(reader.ReadSingle());
-                    else if (valtype == 7) values.Add(reader.ReadInt16());
-                    else if (valtype == 8) values.Add(reader.ReadInt64());
-                    else if (valtype == 9) values.Add(reader.ReadDouble());
+                    break;
                 }
             }
             Console.WriteLine("STRING VALUES");
-            Console.WriteLine(string.Join("\n", string_values));
-            Console.WriteLine("BOOL");
-            Console.WriteLine(string.Join("\n", bool_values));
-            Console.WriteLine("BYTE");
-            Console.WriteLine(string.Join("\n", byte_values));
-            Console.WriteLine("LOOPS");
-            Console.WriteLine(string.Join("\n", loops));
-            Console.WriteLine("SECURITIES");
-            Console.WriteLine(string.Join("\n", securities));
-            Console.WriteLine("CLASS TYPES");
-            Console.WriteLine(string.Join("\n", class_types));
-            Console.WriteLine("VAR TYPES");
-            Console.WriteLine(string.Join("\n", var_types));
-            Console.WriteLine("FUNCTION TYPES");
-            Console.WriteLine(string.Join("\n", function_types));
+            try
+            {
+                Console.WriteLine(string.Join("\n", string_values));
+                Console.WriteLine("BOOL");
+                Console.WriteLine(string.Join("\n", bool_values));
+                Console.WriteLine("BYTE");
+                Console.WriteLine(string.Join("\n", byte_values));
+                Console.WriteLine("LOOPS");
+                Console.WriteLine(string.Join("\n", loops));
+                Console.WriteLine("SECURITIES");
+                Console.WriteLine(string.Join("\n", securities));
+                Console.WriteLine("CLASS TYPES");
+                Console.WriteLine(string.Join("\n", class_types));
+                Console.WriteLine("VAR TYPES");
+                Console.WriteLine(string.Join("\n", var_types));
+                Console.WriteLine("FUNCTION TYPES");
+                Console.WriteLine(string.Join("\n", function_types));
+            }
+            catch { }
         }
 
         public void EndWork()
