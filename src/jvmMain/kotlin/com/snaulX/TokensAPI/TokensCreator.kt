@@ -50,7 +50,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun createClass(name: String, type: ClassType, securityDegree: SecurityDegree) {
         output.writeByte(1)
-        output.writeUTF(name)
+        output.writeBytes(name)
         output.writeByte(type.value)
         output.writeByte(securityDegree.value)
     }
@@ -60,8 +60,8 @@ actual class TokensCreator actual constructor() {
      */
     actual fun createFunction(name: String, typeName: String, type: FuncType, securityDegree: SecurityDegree) {
         output.writeByte(2)
-        output.writeUTF(name)
-        output.writeUTF(typeName)
+        output.writeBytes(name)
+        output.writeBytes(typeName)
         output.writeByte(type.value)
         output.writeByte(securityDegree.value)
     }
@@ -107,7 +107,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun callLiteral(literal: String) {
         output.writeByte(7)
-        output.writeUTF(literal)
+        output.writeBytes(literal)
     }
 
     /**
@@ -139,7 +139,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun insertLabel(name: String) {
         output.writeByte(11)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -148,7 +148,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun goToLabel(name: String) {
         output.writeByte(12)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -158,7 +158,7 @@ actual class TokensCreator actual constructor() {
     actual fun insertLoopOperator(_break: Boolean, labelName: String) {
         output.writeByte(13)
         output.writeBoolean(_break)
-        output.writeUTF(labelName)
+        output.writeBytes(labelName)
     }
 
     /**
@@ -184,7 +184,7 @@ actual class TokensCreator actual constructor() {
             }
             is String -> {
                 output.writeByte(2)
-                output.writeUTF(value)
+                output.writeBytes(value)
             }
             is Byte -> {
                 output.writeByte(3)
@@ -324,7 +324,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun checkTypeOf(name: String) {
         output.writeByte(30)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -332,7 +332,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun setPackage(name: String) {
         output.writeByte(31)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -340,7 +340,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun importLibrary(name: String) {
         output.writeByte(32)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -348,7 +348,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun importPackage(name: String) {
         output.writeByte(33)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -356,7 +356,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun include(name: String) {
         output.writeByte(34)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
@@ -385,7 +385,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun instanceOf(name: String) {
         output.writeByte(38)
-        output.writeUTF(name)
+        output.writeBytes(name)
     }
 
     /**
