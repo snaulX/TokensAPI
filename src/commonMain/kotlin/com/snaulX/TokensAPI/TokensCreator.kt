@@ -193,4 +193,16 @@ expect class TokensCreator() {
      * Insert lambda or after case operator
      */
     fun insertLambda(lambda: Boolean = true)
+    /**
+     * Insert async or await operator
+     */
+    fun insertAsync(await: Boolean = false)
+    /**
+     * Insert parameter type. true - out, false - in
+     */
+    fun parameterType(out: Boolean)
+    /**
+     * Insert ref operator
+     */
+    fun insertRef()
 }

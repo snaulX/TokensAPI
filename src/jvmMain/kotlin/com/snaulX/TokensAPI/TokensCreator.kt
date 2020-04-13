@@ -409,4 +409,27 @@ actual class TokensCreator actual constructor() {
         output.writeByte(41)
         output.writeBoolean(lambda)
     }
+
+    /**
+     * Insert async or await operator
+     */
+    actual fun insertAsync(await: Boolean) {
+        output.writeByte(42)
+        output.writeBoolean(await)
+    }
+
+    /**
+     * Insert parameter type. true - out, false - in
+     */
+    actual fun parameterType(out: Boolean) {
+        output.writeByte(43)
+        output.writeBoolean(out)
+    }
+
+    /**
+     * Insert ref operator
+     */
+    actual fun insertRef() {
+        output.writeByte(44)
+    }
 }

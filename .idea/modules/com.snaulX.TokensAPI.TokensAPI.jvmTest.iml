@@ -6,8 +6,8 @@
         <dependsOnModuleNames>TokensAPI:commonTest</dependsOnModuleNames>
         <sourceSets>
           <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonMain</sourceSet>
-          <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonTest</sourceSet>
           <sourceSet>com.snaulX.TokensAPI.TokensAPI.jvmMain</sourceSet>
+          <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonTest</sourceSet>
         </sourceSets>
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <externalSystemTestTasks>jvmTest|TokensAPI:jvmTest|jvm</externalSystemTestTasks>

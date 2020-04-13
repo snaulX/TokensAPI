@@ -283,4 +283,22 @@ actual class TokensCreator actual constructor() {
      */
     actual fun insertLambda(lambda: Boolean) {
     }
+
+    /**
+     * Insert async or await operator
+     */
+    actual fun insertAsync(await: Boolean) {
+    }
+
+    /**
+     * Insert parameter type. true - out, false - in
+     */
+    actual fun parameterType(out: Boolean) {
+    }
+
+    /**
+     * Insert ref operator
+     */
+    actual fun insertRef() {
+    }
 }

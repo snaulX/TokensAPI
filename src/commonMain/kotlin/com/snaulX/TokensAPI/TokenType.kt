@@ -42,5 +42,8 @@ enum class TokenType(val value: Byte) {
     INSTANCEOF(38),
     WITH(39),
     YIELD(40),
-    LAMBDA(41)
+    LAMBDA(41),
+    ASYNC(42),
+    PARAMETER_TYPE(43),
+    REF(44)
 }
