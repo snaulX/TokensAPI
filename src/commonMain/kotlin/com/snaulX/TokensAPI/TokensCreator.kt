@@ -205,4 +205,8 @@ expect class TokensCreator() {
      * Insert ref operator
      */
     fun insertRef()
+    /**
+     * Insert generic start or end
+     */
+    fun insertGeneric(start: Boolean = true)
 }

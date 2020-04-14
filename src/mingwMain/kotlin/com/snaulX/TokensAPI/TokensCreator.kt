@@ -301,4 +301,10 @@ actual class TokensCreator actual constructor() {
      */
     actual fun insertRef() {
     }
+
+    /**
+     * Insert generic start or end
+     */
+    actual fun insertGeneric(start: Boolean) {
+    }
 }

@@ -432,4 +432,12 @@ actual class TokensCreator actual constructor() {
     actual fun insertRef() {
         output.writeByte(44)
     }
+
+    /**
+     * Insert generic start or end
+     */
+    actual fun insertGeneric(start: Boolean) {
+        output.writeByte(45)
+        output.writeBoolean(start)
+    }
 }

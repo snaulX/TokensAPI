@@ -91,8 +91,8 @@ namespace TokensAPI
                         securities.Add((SecurityDegree)reader.ReadByte());
                     }
                     else if (token == TokenType.BLOCK || token == TokenType.STATEMENT || token == TokenType.SEQUENCE
-                        || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA
-                        || token == TokenType.ACTUAL)
+                        || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA || token == TokenType.ASYNC
+                        || token == TokenType.PARAMETER_TYPE || token == TokenType.GENERIC || token == TokenType.ACTUAL)
                     {
                         bool_values.Add(reader.ReadBoolean());
                     }
@@ -136,26 +136,6 @@ namespace TokensAPI
                     break;
                 }
             }
-            Console.WriteLine("STRING VALUES");
-            try
-            {
-                Console.WriteLine(string.Join("\n", string_values));
-                Console.WriteLine("BOOL");
-                Console.WriteLine(string.Join("\n", bool_values));
-                Console.WriteLine("BYTE");
-                Console.WriteLine(string.Join("\n", byte_values));
-                Console.WriteLine("LOOPS");
-                Console.WriteLine(string.Join("\n", loops));
-                Console.WriteLine("SECURITIES");
-                Console.WriteLine(string.Join("\n", securities));
-                Console.WriteLine("CLASS TYPES");
-                Console.WriteLine(string.Join("\n", class_types));
-                Console.WriteLine("VAR TYPES");
-                Console.WriteLine(string.Join("\n", var_types));
-                Console.WriteLine("FUNCTION TYPES");
-                Console.WriteLine(string.Join("\n", function_types));
-            }
-            catch { }
         }
 
         public void EndWork()
