@@ -70,7 +70,6 @@ namespace TokensAPI
                 try
                 {
                     TokenType token = (TokenType)reader.ReadByte();
-                    Console.WriteLine($"Token: {token}, code: {(byte)token}");
                     tokens.Add(token);
                     if (token == TokenType.CLASS)
                     {
@@ -94,13 +93,13 @@ namespace TokensAPI
                         || token == TokenType.SEPARATOR || token == TokenType.RETURN || token == TokenType.LAMBDA || token == TokenType.ASYNC
                         || token == TokenType.PARAMETER_TYPE || token == TokenType.GENERIC || token == TokenType.ACTUAL)
                     {
-                        bool_values.Add(reader.ReadBoolean());
+                         bool_values.Add(reader.ReadBoolean());
                     }
                     else if (token == TokenType.LITERAL || token == TokenType.TYPEOF || token == TokenType.NAMESPACE
                         || token == TokenType.IMPORT_LIBRARY || token == TokenType.INCLUDE || token == TokenType.USING_NAMESPACE
                         || token == TokenType.INSTANCEOF || token == TokenType.GOTO || token == TokenType.LABEL)
                     {
-                        string_values.Add(reader.ReadString());
+                         string_values.Add(reader.ReadString());
                     }
                     else if (token == TokenType.LOOP)
                     {

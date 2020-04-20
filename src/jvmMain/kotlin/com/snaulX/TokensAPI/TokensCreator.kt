@@ -6,8 +6,13 @@ import java.io.FileOutputStream
 actual class TokensCreator actual constructor() {
     lateinit var output: DataOutputStream
 
-    fun DataOutputStream.writeByte(value: Byte) {
+    private fun DataOutputStream.writeByte(value: Byte) {
         writeByte(value.toInt())
+    }
+
+    private fun DataOutputStream.writeString(value: String) {
+        write(value.length)
+        writeBytes(value)
     }
 
     /**
@@ -50,7 +55,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun createClass(name: String, type: ClassType, securityDegree: SecurityDegree) {
         output.writeByte(1)
-        output.writeBytes(name)
+        output.writeString(name)
         output.writeByte(type.value)
         output.writeByte(securityDegree.value)
     }
@@ -60,8 +65,8 @@ actual class TokensCreator actual constructor() {
      */
     actual fun createFunction(name: String, typeName: String, type: FuncType, securityDegree: SecurityDegree) {
         output.writeByte(2)
-        output.writeBytes(name)
-        output.writeBytes(typeName)
+        output.writeString(name)
+        output.writeString(typeName)
         output.writeByte(type.value)
         output.writeByte(securityDegree.value)
     }
@@ -107,7 +112,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun callLiteral(literal: String) {
         output.writeByte(7)
-        output.writeBytes(literal)
+        output.writeString(literal)
     }
 
     /**
@@ -139,7 +144,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun insertLabel(name: String) {
         output.writeByte(11)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -148,7 +153,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun goToLabel(name: String) {
         output.writeByte(12)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -158,7 +163,7 @@ actual class TokensCreator actual constructor() {
     actual fun insertLoopOperator(_break: Boolean, labelName: String) {
         output.writeByte(13)
         output.writeBoolean(_break)
-        output.writeBytes(labelName)
+        output.writeString(labelName)
     }
 
     /**
@@ -184,7 +189,7 @@ actual class TokensCreator actual constructor() {
             }
             is String -> {
                 output.writeByte(2)
-                output.writeBytes(value)
+                output.writeString(value)
             }
             is Byte -> {
                 output.writeByte(3)
@@ -324,7 +329,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun checkTypeOf(name: String) {
         output.writeByte(30)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -332,7 +337,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun setPackage(name: String) {
         output.writeByte(31)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -340,7 +345,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun importLibrary(name: String) {
         output.writeByte(32)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -348,7 +353,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun importPackage(name: String) {
         output.writeByte(33)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -356,7 +361,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun include(name: String) {
         output.writeByte(34)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**
@@ -385,7 +390,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun instanceOf(name: String) {
         output.writeByte(38)
-        output.writeBytes(name)
+        output.writeString(name)
     }
 
     /**

@@ -23,6 +23,15 @@ actual class TokensReader {
     actual val operators: MutableList<OperatorType> = mutableListOf()
     actual val values: MutableList<Any> = mutableListOf()
 
+    private fun DataInputStream.readString(): String {
+        val len: Int = read()
+        var str: String = ""
+        for (i in 0..len) {
+            str += readByte().toChar()
+        }
+        return str
+    }
+
     actual fun getHeader(): HeaderType = reader.readByte().toHeaderType()
 
     actual fun getTarget(): String = when (reader.readByte()) {
