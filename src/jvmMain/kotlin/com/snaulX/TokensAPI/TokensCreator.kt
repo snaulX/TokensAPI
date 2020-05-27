@@ -22,7 +22,7 @@ actual class TokensCreator actual constructor() {
      */
     actual fun setOutput(appName: String, extension: String) {
         output = DataOutputStream(FileOutputStream(
-                appName + '.' +
+                "$appName." +
                 if (extension.isBlank()) "tokens"
                 else extension
             )

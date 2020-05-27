@@ -12,6 +12,7 @@
         COLLECTION = 7,
         INTERFACE = 8,
         TYPEALIAS = 9,
-        STRUCT = 10
+        STRUCT = 10,
+        SINGLETON = 11
     }
 }
