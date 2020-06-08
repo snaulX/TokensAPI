@@ -15,6 +15,39 @@ actual class TokensCreator actual constructor() {
         writeBytes(value)
     }
 
+    private fun <T> writeNumber(v: T) where T: Number {
+        val value = v.toInt()
+        when {
+            value <= Byte.MAX_VALUE && value >= Byte.MIN_VALUE -> {
+                output.writeByte(0)
+                output.writeByte(value)
+            }
+            value <= Short.MAX_VALUE && value >= Short.MIN_VALUE -> {
+                output.writeByte(1)
+                output.writeByte(value)
+                output.writeByte(value shr 8)
+            }
+            value <= Int.MAX_VALUE && value >= Int.MIN_VALUE -> {
+                output.writeByte(2)
+                output.writeByte(value)
+                output.writeByte(value shr 8)
+                output.writeByte(value shr 16)
+                output.writeByte(value shr 24)
+            }
+            else -> {
+                output.writeByte(2)
+                output.writeByte(value)
+                output.writeByte(value shr 8)
+                output.writeByte(value shr 16)
+                output.writeByte(value shr 24)
+                output.writeByte((value.toLong() shr 32).toInt())
+                output.writeByte((value.toLong() shr 40).toInt())
+                output.writeByte((value.toLong() shr 48).toInt())
+                output.writeByte((value.toLong() shr 56).toInt())
+            }
+        }
+    }
+
     /**
      * Set target compilation file
      * @param appName Name of compiling app (file)
@@ -185,7 +218,7 @@ actual class TokensCreator actual constructor() {
             }
             is Int -> {
                 output.writeByte(1)
-                output.writeInt(value)
+                writeNumber(value)
             }
             is String -> {
                 output.writeByte(2)
@@ -209,11 +242,11 @@ actual class TokensCreator actual constructor() {
             }
             is Short -> {
                 output.writeByte(7)
-                output.writeShort(value.toInt())
+                writeNumber(value)
             }
             is Long -> {
                 output.writeByte(8)
-                output.writeLong(value)
+                writeNumber(value)
             }
             is Double -> {
                 output.writeByte(9)
