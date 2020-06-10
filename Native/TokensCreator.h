@@ -22,7 +22,7 @@ void set_platform(PlatformType p);
 // Write Tokens
 void incline();
 void create_class(const char* name, ClassType ct, SecurityDegree s);
-void create_function(const char* name, FuncType ft, SecurityDegree s);
+void create_function(const char* name, const char* type_name, FuncType ft, SecurityDegree s);
 void start_vardefinition(VarType vt, SecurityDegree s);
 void block(bool start);
 void statement(bool start);
