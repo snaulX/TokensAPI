@@ -31,3 +31,15 @@ void set_platform(PlatformType p)
 {
 	putc(p, output);
 }
+
+void incline()
+{
+	putc(0, output);
+}
+
+void create_class(const char* name, ClassType ct, SecurityDegree s)
+{
+	writestr(name);
+	putc(ct, output);
+	putc(s, output);
+}
