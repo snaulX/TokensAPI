@@ -5,9 +5,9 @@
       <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" isTestModule="true" externalProjectId="TokensAPI">
         <dependsOnModuleNames>TokensAPI:commonTest</dependsOnModuleNames>
         <sourceSets>
-          <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonMain</sourceSet>
           <sourceSet>com.snaulX.TokensAPI.TokensAPI.jvmMain</sourceSet>
           <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonTest</sourceSet>
+          <sourceSet>com.snaulX.TokensAPI.TokensAPI.commonMain</sourceSet>
         </sourceSets>
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <externalSystemTestTasks>jvmTest|TokensAPI:jvmTest|jvm</externalSystemTestTasks>
