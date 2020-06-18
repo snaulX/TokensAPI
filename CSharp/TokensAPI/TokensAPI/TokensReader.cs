@@ -33,6 +33,7 @@ namespace TokensAPI
             loops = new List<LoopType>();
             operators = new List<OperatorType>();
             class_types = new List<ClassType>();
+            var_types = new List<VarType>();
         }
 
         public TokensReader(string path) : this()
@@ -124,24 +125,24 @@ namespace TokensAPI
                         else if (valtype == 1)
                         {
                             valtype = reader.ReadByte();
-                            if (valtype == 0) values.Add((int)reader.ReadByte());
+                            if (valtype == 0) values.Add((int)reader.ReadSByte());
                             else if (valtype == 1) values.Add((int)reader.ReadInt16());
                             else values.Add(reader.ReadInt32());
                         }
                         else if (valtype == 2) values.Add(reader.ReadString());
-                        else if (valtype == 3) values.Add(reader.ReadByte());
+                        else if (valtype == 3) values.Add(reader.ReadSByte());
                         else if (valtype == 4) values.Add(reader.ReadBoolean());
                         else if (valtype == 5) values.Add(reader.ReadChar());
                         else if (valtype == 6) values.Add(reader.ReadSingle());
                         else if (valtype == 7)
                         {
                             if (reader.ReadBoolean()) values.Add(reader.ReadInt16());
-                            else values.Add((short)reader.ReadByte());
+                            else values.Add((short)reader.ReadSByte());
                         }
                         else if (valtype == 8)
                         {
                             valtype = reader.ReadByte();
-                            if (valtype == 0) values.Add((long)reader.ReadByte());
+                            if (valtype == 0) values.Add((long)reader.ReadSByte());
                             else if (valtype == 1) values.Add((long)reader.ReadInt16());
                             else if (valtype == 2) values.Add((long)reader.ReadInt32());
                             else values.Add(reader.ReadInt64());
